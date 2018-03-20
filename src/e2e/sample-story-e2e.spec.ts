@@ -20,4 +20,9 @@ describe("sample-story End-To-End", () => {
         const sequence: SequenceModel = await stories.getCurrentSequence();
         expect(sequence).not.toBeNull();
     });
+
+    it("make first choice", async () => {
+        stories.makeChoice(1);
+        //expect(sequence).not.toBeNull();
+    });
 });
