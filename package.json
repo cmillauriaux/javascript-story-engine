@@ -1,0 +1,38 @@
+{
+  "name": "story-engine-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "files": [
+    "lib"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/src/.*\\.spec\\.ts$"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.2"
+  },
+  "devDependencies": { 
+    "@types/node": "^7.0.5",
+    "@types/jest": "^22.2.0",
+    "jest": "^22.4.2",
+    "ts-jest": "^22.4.2",
+    "typescript": "^2.7.2"
+  }
+}
