@@ -1,8 +1,9 @@
 import { Condition } from "../models/Condition";
 import { Choice } from "../models/Choice";
-import { Consequence } from "../models/Consequence";
 import { ContextModel } from "../models/Context";
 import { SequenceModel } from "../models/Sequence";
+import { Consequence } from "../models/Consequence";
+import { ConsequenceRules } from "./consequence.rules";
 
 export class Engine {
     isConditionValid(condition: Condition, context: ContextModel): Boolean {
@@ -15,7 +16,7 @@ export class Engine {
             if (this.isConditionValid(condition, context)) {
                 valids.push(condition);
             }
-        };
+        }
 
         return valids;
     }
@@ -40,17 +41,33 @@ export class Engine {
             if (this.isConsequenceValid(consequence, context)) {
                 valids.push(consequence);
             }
-        };
+        }
 
         return valids;
     }
 
-    applyConsequences(consequences: Consequence[], context: ContextModel): ContextModel {
+    async applyConsequences(consequences: Consequence[], context: ContextModel): Promise<ContextModel> {
         for (let consequence of consequences) {
             if (this.isConsequenceValid(consequence, context)) {
-                consequence.apply(context);
+                let consequenceCast: Consequence;
+                switch (consequence.type) {
+                    case "SkillConsequence":
+                        context = ConsequenceRules.applySkillConsequence(consequence, context);
+                        break;
+                    case "CaracteristicConsequence":
+                        context = ConsequenceRules.applyCaracteristicConsequence(consequence, context);
+                        break;
+                    case "RelationConsequence":
+                        context = ConsequenceRules.applyRelationConsequence(consequence, context);
+                        break;
+                    case "SequenceTransitionConsequence":
+                        context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context);
+                        break;
+                    default:
+                        throw new Error("Unknown consequence");
+                }
             }
-        };
+        }
         return context;
     }
 }

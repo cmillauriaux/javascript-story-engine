@@ -23,6 +23,8 @@ describe("sample-story End-To-End", () => {
 
     it("make first choice", async () => {
         stories.makeChoice(1);
-        //expect(sequence).not.toBeNull();
+        const strength: number = stories.context.skills.get("Strength");
+        expect(strength).not.toBeNull();
+        expect(strength).toBe(10);
     });
 });

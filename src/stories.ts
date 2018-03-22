@@ -12,9 +12,9 @@ const persistance: Persistance = new Persistance("example");
 const engine: Engine = new Engine();
 
 export class Stories {
-    private context: ContextModel;
+    public context: ContextModel;
 
-    initContext() {
+    initContext(): void {
         this.context = {
             id: "new-context",
             relations: [],
@@ -70,7 +70,7 @@ export class Stories {
             if (choiceValid) {
                 clone.choices.push(choice);
             }
-        };
+        }
 
         return clone;
     }

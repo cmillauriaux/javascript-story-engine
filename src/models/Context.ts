@@ -3,7 +3,7 @@ import { StoryModel } from "./Story";
 import { ChapterModel } from "./Chapter";
 import { SequenceModel } from "./Sequence";
 
-export type ContextModel = {
+export class ContextModel {
     id: string;
     relations: Relation[];
     skills: Map<String, number>;
@@ -12,4 +12,4 @@ export type ContextModel = {
     chapter: ChapterModel;
     sequence: SequenceModel;
     currentDialog: number;
-};
+}

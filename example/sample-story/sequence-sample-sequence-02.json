@@ -1,8 +1,8 @@
 {
-    "id": "sample-sequence-01",
+    "id": "sample-sequence-02",
     "storyId": "sample-story",
     "chapterId": "sample-chapter-01",
-    "title": "Sample Sequence 01",
+    "title": "Sample Sequence 02",
     "version": 2,
     "background": "sample-background.jpg",
     "next": {
