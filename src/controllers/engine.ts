@@ -11,22 +11,21 @@ export class Engine {
 
     getValidConditions(conditions: Condition[], context: ContextModel): Condition[] {
         const valids: Condition[] = [];
-
-        conditions.forEach(condition => {
+        for (let condition of conditions) {
             if (this.isConditionValid(condition, context)) {
                 valids.push(condition);
             }
-        });
+        };
 
         return valids;
     }
 
     getChoice(choices: Choice[], order: number): Choice {
-        choices.forEach(choice => {
+        for (let choice of choices) {
             if (choice.order === order) {
                 return choice;
             }
-        });
+        }
         throw new Error("Cannot retrieve choice");
     }
 
@@ -37,12 +36,21 @@ export class Engine {
     getValidConsequences(consequences: Consequence[], context: ContextModel): Consequence[] {
         const valids: Consequence[] = [];
 
-        consequences.forEach(consequence => {
+        for (let consequence of consequences) {
             if (this.isConsequenceValid(consequence, context)) {
                 valids.push(consequence);
             }
-        });
+        };
 
         return valids;
+    }
+
+    applyConsequences(consequences: Consequence[], context: ContextModel): ContextModel {
+        for (let consequence of consequences) {
+            if (this.isConsequenceValid(consequence, context)) {
+                consequence.apply(context);
+            }
+        };
+        return context;
     }
 }

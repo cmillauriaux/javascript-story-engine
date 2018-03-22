@@ -55,7 +55,8 @@ export class Persistance {
 
     async getSequence(storyId: string, sequenceId: string): Promise<SequenceModel> {
         const story : string = await this.readFile("./" + storyId + "/sequence-" + sequenceId + ".json");
-        return JSON.parse(story);
+        const sequence: SequenceModel = JSON.parse(story);
+        return sequence;
     }
 
     async getContext(storyId: string, contextId: string): Promise<ContextModel> {

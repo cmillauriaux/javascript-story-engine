@@ -6,13 +6,13 @@
     "version": 2,
     "background": "sample-background.jpg",
     "next": {
-        "sample-sequence-02" : {
+        "sample-sequence-02": {
             "attribute": "",
             "superior": true,
             "equal": false,
             "value": 10
         },
-        "sample-sequence-03" : {
+        "sample-sequence-03": {
             "attribute": "",
             "superior": false,
             "equal": true,
@@ -52,24 +52,25 @@
             "title": "Choice 1",
             "conditions": [],
             "consequences": [
-
+                {
+                    "type": "SkillConsequence",
+                    "name": "Strength",
+                    "bonus": true,
+                    "value": 10
+                }
             ]
         },
         {
             "order": 2,
             "title": "Choice 2",
             "conditions": [],
-            "consequences": [
-                
-            ]
+            "consequences": []
         },
         {
             "order": 3,
             "title": "Choice 3",
             "conditions": [],
-            "consequences": [
-                
-            ]
+            "consequences": []
         }
     ]
 }

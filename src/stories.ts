@@ -12,36 +12,46 @@ const persistance: Persistance = new Persistance("example");
 const engine: Engine = new Engine();
 
 export class Stories {
-    private story: StoryModel;
-    private chapter: ChapterModel;
-    private sequence: SequenceModel;
-    private currentDialog: number;
     private context: ContextModel;
 
+    initContext() {
+        this.context = {
+            id: "new-context",
+            relations: [],
+            skills: new Map<String, number>(),
+            caractertistics: new Map<String, number>(),
+            story: null,
+            chapter: null,
+            sequence: null,
+            currentDialog: 0,
+        };
+    }
+
     async loadStory(storyId: string): Promise<StoryModel> {
-        this.story = await persistance.getStory(storyId);
-        return this.story;
+        this.initContext();
+        this.context.story = await persistance.getStory(storyId);
+        return this.context.story;
     }
 
     getCurrentStory(): StoryModel {
-        return this.story;
+        return this.context.story;
     }
 
     async loadChapter(storyId: string, chapterId: string): Promise<ChapterModel> {
-        if (!this.story) {
+        if (!this.context.story) {
             throw new Error("No story loaded");
         }
-        this.chapter = await persistance.getChapter(storyId, chapterId);
-        this.sequence = await persistance.getSequence(storyId, this.chapter.entrypoint);
-        return this.chapter;
+        this.context.chapter = await persistance.getChapter(storyId, chapterId);
+        this.context.sequence = await persistance.getSequence(storyId, this.context.chapter.entrypoint);
+        return this.context.chapter;
     }
 
     getCurrentChapter(): ChapterModel {
-        return this.chapter;
+        return this.context.chapter;
     }
 
     getCurrentSequence(): SequenceModel {
-        return this.getClientSequence(this.sequence);
+        return this.getClientSequence(this.context.sequence);
     }
 
     getClientSequence(sequence: SequenceModel): SequenceModel {
@@ -50,30 +60,32 @@ export class Stories {
 
         // return valid choices only
         clone.choices = [];
-        sequence.choices.forEach(choice => {
+        for (let choice of sequence.choices) {
             let choiceValid: Boolean = true;
-            choice.conditions.forEach(condition => {
+            for (let condition of choice.conditions) {
                 if (!engine.isConditionValid(condition, this.context)) {
                     choiceValid = false;
                 }
-            });
+            }
             if (choiceValid) {
                 clone.choices.push(choice);
             }
-        });
+        };
 
         return clone;
     }
 
     makeChoice(order: number): Consequence[] {
-        if (!this.sequence) {
+        if (!this.context.sequence) {
             throw new Error("Aucune séquence en cours");
         }
 
-        const choice: Choice = engine.getChoice(this.sequence.choices, order);
+        const choice: Choice = engine.getChoice(this.context.sequence.choices, order);
         if (!engine.isConditionValid(choice, this.context)) {
             throw new Error("Invalid choice");
         }
+
+        engine.applyConsequences(choice.consequences, this.context);
 
         return engine.getValidConsequences(choice.consequences, this.context);
     }
