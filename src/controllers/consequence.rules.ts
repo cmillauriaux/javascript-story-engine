@@ -9,8 +9,8 @@ export module ConsequenceRules {
             context.skills = new Map<String, number>();
         }
         let actualValue: number = 0;
-        if (actualValue && !isNaN(context.skills.get(name))) {
-            actualValue = context.skills.get(name);
+        if (!isNaN(context.skills.get(consequence.name))) {
+            actualValue = context.skills.get(consequence.name);
         }
         if (consequence.bonus) {
             context.skills.set(consequence.name, actualValue + consequence.value);
@@ -25,8 +25,8 @@ export module ConsequenceRules {
             context.caractertistics = new Map<String, number>();
         }
         let actualValue: number = 0;
-        if (actualValue && !isNaN(context.caractertistics.get(name))) {
-            actualValue = context.caractertistics.get(name);
+        if (!isNaN(context.caractertistics.get(consequence.name))) {
+            actualValue = context.caractertistics.get(consequence.name);
         }
         if (consequence.bonus) {
             context.caractertistics.set(consequence.name, actualValue + consequence.value);
@@ -37,7 +37,6 @@ export module ConsequenceRules {
     }
 
     export function applyRelationConsequence(consequence: Consequence, context: ContextModel): ContextModel {
-
         return context;
     }
 
