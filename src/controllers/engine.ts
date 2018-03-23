@@ -4,10 +4,21 @@ import { ContextModel } from "../models/Context";
 import { SequenceModel } from "../models/Sequence";
 import { Consequence } from "../models/Consequence";
 import { ConsequenceRules } from "./consequence.rules";
+import { ConditionRules } from "./condition.rules";
 
 export class Engine {
-    isConditionValid(condition: Condition, context: ContextModel): Boolean {
-        return true;
+    isConditionValid(condition: Condition, context: ContextModel): boolean {
+        let consequenceCast: Consequence;
+        switch (condition.type) {
+            case "SkillCondition":
+                return ConditionRules.applySkillCondition(condition, context);
+            case "CaracteristicCondition":
+                return ConditionRules.applyCaracteristicCondition(condition, context);
+            case "RelationCondition":
+                return ConditionRules.applyRelationCondition(condition, context);
+            default:
+                throw new Error("Unknown consequence");
+        }
     }
 
     getValidConditions(conditions: Condition[], context: ContextModel): Condition[] {
