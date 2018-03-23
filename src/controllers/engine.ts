@@ -21,6 +21,10 @@ export class Engine {
         return valids;
     }
 
+    isChoiceValid(choice: Choice, context: ContextModel): Boolean {
+        return true;
+    }
+
     getChoice(choices: Choice[], order: number): Choice {
         for (let choice of choices) {
             if (choice.order === order) {

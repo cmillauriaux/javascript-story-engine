@@ -81,7 +81,7 @@ export class Stories {
         }
 
         const choice: Choice = engine.getChoice(this.context.sequence.choices, order);
-        if (!engine.isConditionValid(choice, this.context)) {
+        if (!engine.isChoiceValid(choice, this.context)) {
             throw new Error("Invalid choice");
         }
 
