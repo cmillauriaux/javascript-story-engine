@@ -2,7 +2,9 @@
   "name": "story-engine-library",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "stories.js",
+  "module": "stories.js",
+  "typings": "types/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc",

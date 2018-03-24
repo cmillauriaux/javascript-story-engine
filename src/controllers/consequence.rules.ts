@@ -2,7 +2,7 @@ import { Consequence } from "../models/Consequence";
 import { ContextModel } from "../models/Context";
 import { Persistance } from "./persistance";
 
-export module ConsequenceRules {
+export namespace ConsequenceRules {
 
     export function applySkillConsequence(consequence: Consequence, context: ContextModel): ContextModel {
         if (!context.skills) {

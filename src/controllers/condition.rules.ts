@@ -1,7 +1,7 @@
 import { Condition } from "../models/Condition";
 import { ContextModel } from "../models/Context";
 
-export module ConditionRules {
+export namespace ConditionRules {
 
     export function applySkillCondition(condition: Condition, context: ContextModel): boolean {
         if (!context.skills) {
