@@ -2,5 +2,5 @@
     "id": "sample-story",
     "title": "Sample Story",
     "version": 22,
-    "entrypoint": "sample-chapter-01"
+    "entrypoint": "sample-scene-01"
 }

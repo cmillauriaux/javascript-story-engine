@@ -1,4 +1,4 @@
-export type ChapterModel = {
+export type SceneModel = {
     id: string;
     storyId: string;
     title: string;

@@ -1,5 +1,5 @@
 import { StoryModel } from "../models/Story";
-import { ChapterModel } from "../models/Chapter";
+import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
 import { CharacterModel } from "../models/Character";
 import * as fs from "fs";
@@ -29,7 +29,7 @@ export class Persistance {
         });
     }
 
-    listChapters(storyId: string): ChapterModel[] {
+    listChapters(storyId: string): SceneModel[] {
         return [];
     }
 
@@ -43,8 +43,8 @@ export class Persistance {
         return JSON.parse(story);
     }
 
-    async getChapter(storyId: string, chapterId: string): Promise<ChapterModel> {
-        const story : string  = await this.readFile("./" + storyId + "/chapter-" + chapterId + ".json");
+    async getChapter(storyId: string, chapterId: string): Promise<SceneModel> {
+        const story : string  = await this.readFile("./" + storyId + "/scene-" + chapterId + ".json");
         return JSON.parse(story);
     }
 

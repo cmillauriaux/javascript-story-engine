@@ -28,25 +28,25 @@ export module ConditionRules {
         return false;
     }
 
-    export function applyCaracteristicCondition(condition: Condition, context: ContextModel): boolean {
-        if (!context.caractertistics) {
+    export function applyInventoryCondition(condition: Condition, context: ContextModel): boolean {
+        if (!context.inventory) {
             return false;
         }
-        const caracteristic: number = context.caractertistics.get(condition.attribute);
+        const inventory: number = context.inventory.get(condition.attribute);
 
-        if (caracteristic !== undefined && condition.exists) {
+        if (inventory !== undefined && condition.exists) {
             return true;
         }
 
-        if (condition.equal && condition.value === caracteristic) {
+        if (condition.equal && condition.value === inventory) {
             return true;
         }
 
-        if (condition.superior && caracteristic > condition.value) {
+        if (condition.superior && inventory > condition.value) {
             return true;
         }
 
-        if (condition.inferior && caracteristic < condition.value) {
+        if (condition.inferior && inventory < condition.value) {
             return true;
         }
 

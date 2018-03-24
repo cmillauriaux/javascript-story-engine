@@ -1,7 +1,7 @@
 import { SequenceModel } from "./models/Sequence";
 import { StoryModel } from "./models/Story";
 import { Persistance } from "./controllers/persistance";
-import { ChapterModel } from "./models/Chapter";
+import { SceneModel } from "./models/Scene";
 import { Consequence } from "./models/Consequence";
 import { Engine } from "./controllers/engine";
 import { Choice } from "./models/Choice";
@@ -19,9 +19,9 @@ export class Stories {
             id: "new-context",
             relations: [],
             skills: new Map<String, number>(),
-            caractertistics: new Map<String, number>(),
+            inventory: new Map<String, number>(),
             story: null,
-            chapter: null,
+            scene: null,
             sequence: null,
             currentDialog: 0,
         };
@@ -37,17 +37,17 @@ export class Stories {
         return this.context.story;
     }
 
-    async loadChapter(storyId: string, chapterId: string): Promise<ChapterModel> {
+    async loadChapter(storyId: string, chapterId: string): Promise<SceneModel> {
         if (!this.context.story) {
             throw new Error("No story loaded");
         }
-        this.context.chapter = await persistance.getChapter(storyId, chapterId);
-        this.context.sequence = await persistance.getSequence(storyId, this.context.chapter.entrypoint);
-        return this.context.chapter;
+        this.context.scene = await persistance.getChapter(storyId, chapterId);
+        this.context.sequence = await persistance.getSequence(storyId, this.context.scene.entrypoint);
+        return this.context.scene;
     }
 
-    getCurrentChapter(): ChapterModel {
-        return this.context.chapter;
+    getCurrentChapter(): SceneModel {
+        return this.context.scene;
     }
 
     getCurrentSequence(): SequenceModel {

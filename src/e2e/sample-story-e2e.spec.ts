@@ -1,6 +1,6 @@
 import { Stories } from "../stories";
 import { StoryModel } from "../models/Story";
-import { ChapterModel } from "../models/Chapter";
+import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
 
 describe("sample-story End-To-End", () => {
@@ -9,11 +9,11 @@ describe("sample-story End-To-End", () => {
     it("load story", async () => {
         stories = new Stories();
         const story: StoryModel = await stories.loadStory("sample-story");
-        const chapter: ChapterModel = await stories.loadChapter("sample-story", "sample-chapter-01");
+        const scene: SceneModel = await stories.loadChapter("sample-story", "sample-scene-01");
         expect(story).not.toBeNull();
         expect(story.id).toBe("sample-story");
-        expect(chapter).not.toBeNull();
-        expect(chapter.id).toBe("sample-chapter-01");
+        expect(scene).not.toBeNull();
+        expect(scene.id).toBe("sample-scene-01");
     });
 
     it("read first sequence", async () => {

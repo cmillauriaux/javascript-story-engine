@@ -1,6 +1,6 @@
 import { Stories } from "./stories";
 import { StoryModel } from "./models/Story";
-import { ChapterModel } from "./models/Chapter";
+import { SceneModel } from "./models/Scene";
 import { SequenceModel } from "./models/Sequence";
 
 describe("stories", () => {
@@ -19,27 +19,27 @@ describe("stories", () => {
         expect(story.id).toBe("sample-story");
     });
 
-    it("load chapter", async () => {
+    it("load scene", async () => {
         const stories: Stories = new Stories();
         await stories.loadStory("sample-story");
-        const chapter: ChapterModel = await stories.loadChapter("sample-story", "sample-chapter-01");
-        expect(chapter).not.toBeNull();
-        expect(chapter.id).toBe("sample-chapter-01");
+        const scene: SceneModel = await stories.loadChapter("sample-story", "sample-scene-01");
+        expect(scene).not.toBeNull();
+        expect(scene.id).toBe("sample-scene-01");
     });
 
-    it("get current chapter", async () => {
+    it("get current scene", async () => {
         const stories: Stories = new Stories();
         await stories.loadStory("sample-story");
-        await stories.loadChapter("sample-story", "sample-chapter-01");
-        const chapter: ChapterModel = await stories.getCurrentChapter();
-        expect(chapter).not.toBeNull();
-        expect(chapter.id).toBe("sample-chapter-01");
+        await stories.loadChapter("sample-story", "sample-scene-01");
+        const scene: SceneModel = await stories.getCurrentChapter();
+        expect(scene).not.toBeNull();
+        expect(scene.id).toBe("sample-scene-01");
     });
 
     it("get current sequence", async () => {
         const stories: Stories = new Stories();
         await stories.loadStory("sample-story");
-        await stories.loadChapter("sample-story", "sample-chapter-01");
+        await stories.loadChapter("sample-story", "sample-scene-01");
         const sequence: SequenceModel = await stories.getCurrentSequence();
         expect(sequence).not.toBeNull();
         expect(sequence.id).toBe("sample-sequence-01");

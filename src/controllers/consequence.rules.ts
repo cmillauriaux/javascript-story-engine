@@ -20,18 +20,18 @@ export module ConsequenceRules {
         return context;
     }
 
-    export function applyCaracteristicConsequence(consequence: Consequence, context: ContextModel): ContextModel {
-        if (!context.caractertistics) {
-            context.caractertistics = new Map<String, number>();
+    export function applyInventoryConsequence(consequence: Consequence, context: ContextModel): ContextModel {
+        if (!context.inventory) {
+            context.inventory = new Map<String, number>();
         }
         let actualValue: number = 0;
-        if (!isNaN(context.caractertistics.get(consequence.name))) {
-            actualValue = context.caractertistics.get(consequence.name);
+        if (!isNaN(context.inventory.get(consequence.name))) {
+            actualValue = context.inventory.get(consequence.name);
         }
         if (consequence.bonus) {
-            context.caractertistics.set(consequence.name, actualValue + consequence.value);
+            context.inventory.set(consequence.name, actualValue + consequence.value);
         } else {
-            context.caractertistics.set(consequence.name, actualValue - consequence.value);
+            context.inventory.set(consequence.name, actualValue - consequence.value);
         }
         return context;
     }

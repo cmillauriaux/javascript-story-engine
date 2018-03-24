@@ -99,98 +99,98 @@ describe("condition rules", () => {
         expect(isCondition).toBe(false);
     });
 
-    it("applyCaracteristicCondition equal", async () => {
+    it("applyInventoryCondition equal", async () => {
         let context: ContextModel = new ContextModel();
-        context.caractertistics = new Map<String, number>();
-        context.caractertistics.set("Strength", 10);
+        context.inventory = new Map<String, number>();
+        context.inventory.set("Strength", 10);
         const condition: Condition = new Condition();
-        condition.type = "caracteristicCondition";
+        condition.type = "inventoryCondition";
         condition.attribute = "Strength";
         condition.equal = true;
         condition.value = 10;
-        const isCondition: boolean = ConditionRules.applyCaracteristicCondition(condition, context);
-        const strength: number = context.caractertistics.get("Strength");
+        const isCondition: boolean = ConditionRules.applyInventoryCondition(condition, context);
+        const strength: number = context.inventory.get("Strength");
         expect(isCondition).not.toBeNull();
         expect(isCondition).toBe(true);
     });
 
-    it("applyCaracteristicCondition superior", async () => {
+    it("applyInventoryCondition superior", async () => {
         let context: ContextModel = new ContextModel();
-        context.caractertistics = new Map<String, number>();
-        context.caractertistics.set("Strength", 10);
+        context.inventory = new Map<String, number>();
+        context.inventory.set("Strength", 10);
         const condition: Condition = new Condition();
-        condition.type = "caracteristicCondition";
+        condition.type = "inventoryCondition";
         condition.attribute = "Strength";
         condition.superior = true;
         condition.value = 9;
-        const isCondition: boolean = ConditionRules.applyCaracteristicCondition(condition, context);
-        const strength: number = context.caractertistics.get("Strength");
+        const isCondition: boolean = ConditionRules.applyInventoryCondition(condition, context);
+        const strength: number = context.inventory.get("Strength");
         expect(isCondition).not.toBeNull();
         expect(isCondition).toBe(true);
     });
 
-    it("applyCaracteristicCondition inferior", async () => {
+    it("applyInventoryCondition inferior", async () => {
         let context: ContextModel = new ContextModel();
-        context.caractertistics = new Map<String, number>();
-        context.caractertistics.set("Strength", 10);
+        context.inventory = new Map<String, number>();
+        context.inventory.set("Strength", 10);
         const condition: Condition = new Condition();
-        condition.type = "caracteristicCondition";
+        condition.type = "inventoryCondition";
         condition.attribute = "Strength";
         condition.inferior = true;
         condition.value = 11;
-        const isCondition: boolean = ConditionRules.applyCaracteristicCondition(condition, context);
-        const strength: number = context.caractertistics.get("Strength");
+        const isCondition: boolean = ConditionRules.applyInventoryCondition(condition, context);
+        const strength: number = context.inventory.get("Strength");
         expect(isCondition).not.toBeNull();
         expect(isCondition).toBe(true);
     });
 
-    it("applyCaracteristicCondition exists", async () => {
+    it("applyInventoryCondition exists", async () => {
         let context: ContextModel = new ContextModel();
-        context.caractertistics = new Map<String, number>();
-        context.caractertistics.set("Strength", 10);
+        context.inventory = new Map<String, number>();
+        context.inventory.set("Strength", 10);
         const condition: Condition = new Condition();
-        condition.type = "caracteristicCondition";
+        condition.type = "inventoryCondition";
         condition.attribute = "Strength";
         condition.exists = true;
-        const isCondition: boolean = ConditionRules.applyCaracteristicCondition(condition, context);
+        const isCondition: boolean = ConditionRules.applyInventoryCondition(condition, context);
         expect(isCondition).not.toBeNull();
         expect(isCondition).toBe(true);
     });
 
-    it("applyCaracteristicCondition not true", async () => {
+    it("applyInventoryCondition not true", async () => {
         let context: ContextModel = new ContextModel();
-        context.caractertistics = new Map<String, number>();
-        context.caractertistics.set("Strength", 10);
+        context.inventory = new Map<String, number>();
+        context.inventory.set("Strength", 10);
         const condition: Condition = new Condition();
-        condition.type = "caracteristicCondition";
+        condition.type = "inventoryCondition";
         condition.attribute = "Strength";
         condition.inferior = true;
         condition.value = 8;
-        const isCondition: boolean = ConditionRules.applyCaracteristicCondition(condition, context);
-        const strength: number = context.caractertistics.get("Strength");
+        const isCondition: boolean = ConditionRules.applyInventoryCondition(condition, context);
+        const strength: number = context.inventory.get("Strength");
         expect(isCondition).not.toBeNull();
         expect(isCondition).toBe(false);
     });
 
-    it("applyCaracteristicCondition unknkown caractertistic", async () => {
+    it("applyInventoryCondition unknkown caractertistic", async () => {
         let context: ContextModel = new ContextModel();
-        context.caractertistics = new Map<String, number>();
+        context.inventory = new Map<String, number>();
         const condition: Condition = new Condition();
-        condition.type = "caracteristicCondition";
+        condition.type = "inventoryCondition";
         condition.attribute = "Luck";
         condition.inferior = true;
-        const isCondition: boolean = ConditionRules.applyCaracteristicCondition(condition, context);
+        const isCondition: boolean = ConditionRules.applyInventoryCondition(condition, context);
         expect(isCondition).not.toBeNull();
         expect(isCondition).toBe(false);
     });
 
-    it("applyCaracteristicCondition unitialized caractertistics", async () => {
+    it("applyInventoryCondition unitialized inventory", async () => {
         let context: ContextModel = new ContextModel();
         const condition: Condition = new Condition();
-        condition.type = "caracteristicCondition";
+        condition.type = "inventoryCondition";
         condition.attribute = "Luck";
         condition.inferior = true;
-        const isCondition: boolean = ConditionRules.applyCaracteristicCondition(condition, context);
+        const isCondition: boolean = ConditionRules.applyInventoryCondition(condition, context);
         expect(isCondition).not.toBeNull();
         expect(isCondition).toBe(false);
     });

@@ -12,8 +12,8 @@ export class Engine {
         switch (condition.type) {
             case "SkillCondition":
                 return ConditionRules.applySkillCondition(condition, context);
-            case "CaracteristicCondition":
-                return ConditionRules.applyCaracteristicCondition(condition, context);
+            case "InventoryCondition":
+                return ConditionRules.applyInventoryCondition(condition, context);
             case "RelationCondition":
                 return ConditionRules.applyRelationCondition(condition, context);
             default:
@@ -69,8 +69,8 @@ export class Engine {
                     case "SkillConsequence":
                         context = ConsequenceRules.applySkillConsequence(consequence, context);
                         break;
-                    case "CaracteristicConsequence":
-                        context = ConsequenceRules.applyCaracteristicConsequence(consequence, context);
+                    case "InventoryConsequence":
+                        context = ConsequenceRules.applyInventoryConsequence(consequence, context);
                         break;
                     case "RelationConsequence":
                         context = ConsequenceRules.applyRelationConsequence(consequence, context);

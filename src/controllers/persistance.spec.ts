@@ -1,6 +1,6 @@
 import { Persistance } from "./persistance";
 import { StoryModel } from "../models/Story";
-import { ChapterModel } from "../models/Chapter";
+import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
 import { CharacterModel } from "../models/Character";
 import { ContextModel } from "../models/Context";
@@ -13,11 +13,11 @@ describe("persistance", () => {
         expect(story.id).toBe("sample-story");
     });
 
-    it("load chapter", async () => {
+    it("load scene", async () => {
         const persistance: Persistance = new Persistance("example");
-        const chapter: ChapterModel = await persistance.getChapter("sample-story", "sample-chapter-01");
-        expect(chapter).not.toBeNull();
-        expect(chapter.id).toBe("sample-chapter-01");
+        const scene: SceneModel = await persistance.getChapter("sample-story", "sample-scene-01");
+        expect(scene).not.toBeNull();
+        expect(scene.id).toBe("sample-scene-01");
     });
 
     it("load sequence", async () => {

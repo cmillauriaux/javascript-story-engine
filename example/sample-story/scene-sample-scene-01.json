@@ -1,7 +1,7 @@
 {
-    "id": "sample-chapter-01",
+    "id": "sample-scene-01",
     "storyId": "sample-story",
-    "title": "Sample Chapter 01",
+    "title": "Sample Scene 01",
     "version": 8,
     "entrypoint": "sample-sequence-01"
 }

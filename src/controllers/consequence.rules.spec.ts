@@ -46,43 +46,43 @@ describe("consequence rules", () => {
         expect(strength).toBe(-10);
     });
 
-    it("applyCaracteristicConsequence bonus", async () => {
+    it("applyInventoryConsequence bonus", async () => {
         let context: ContextModel = new ContextModel();
         const consequence: Consequence = new Consequence();
         consequence.bonus = true;
         consequence.name = "Strength";
         consequence.type = "SkillConsequence";
         consequence.value = 10;
-        context = ConsequenceRules.applyCaracteristicConsequence(consequence, context);
-        const strength: number = context.caractertistics.get("Strength");
+        context = ConsequenceRules.applyInventoryConsequence(consequence, context);
+        const strength: number = context.inventory.get("Strength");
         expect(strength).not.toBeNull();
         expect(strength).toBe(10);
     });
 
-    it("applyCaracteristicConsequence bonus with initial value", async () => {
+    it("applyInventoryConsequence bonus with initial value", async () => {
         let context: ContextModel = new ContextModel();
-        context.caractertistics = new Map<String, number>();
-        context.caractertistics.set("Strength", 10);
+        context.inventory = new Map<String, number>();
+        context.inventory.set("Strength", 10);
         const consequence: Consequence = new Consequence();
         consequence.bonus = true;
         consequence.name = "Strength";
         consequence.type = "SkillConsequence";
         consequence.value = 10;
-        context = ConsequenceRules.applyCaracteristicConsequence(consequence, context);
-        const strength: number = context.caractertistics.get("Strength");
+        context = ConsequenceRules.applyInventoryConsequence(consequence, context);
+        const strength: number = context.inventory.get("Strength");
         expect(strength).not.toBeNull();
         expect(strength).toBe(20);
     });
 
-    it("applyCaracteristicConsequence malus", async () => {
+    it("applyInventoryConsequence malus", async () => {
         let context: ContextModel = new ContextModel();
         const consequence: Consequence = new Consequence();
         consequence.bonus = false;
         consequence.name = "Strength";
         consequence.type = "SkillConsequence";
         consequence.value = 10;
-        context = ConsequenceRules.applyCaracteristicConsequence(consequence, context);
-        const strength: number = context.caractertistics.get("Strength");
+        context = ConsequenceRules.applyInventoryConsequence(consequence, context);
+        const strength: number = context.inventory.get("Strength");
         expect(strength).not.toBeNull();
         expect(strength).toBe(-10);
     });
