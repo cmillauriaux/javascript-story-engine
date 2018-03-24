@@ -33,6 +33,12 @@ export class Engine {
     }
 
     isChoiceValid(choice: Choice, context: ContextModel): Boolean {
+        for (let condition of choice.conditions) {
+            if (!this.isConditionValid(condition, context)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -46,6 +52,14 @@ export class Engine {
     }
 
     isConsequenceValid(consequence: Consequence, context: ContextModel): Boolean {
+        if (consequence.conditions) {
+            for (let condition of consequence.conditions) {
+                if (!this.isConditionValid(condition, context)) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 

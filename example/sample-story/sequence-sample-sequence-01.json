@@ -67,14 +67,50 @@
         {
             "order": 2,
             "title": "Choice 2",
-            "conditions": [],
+            "conditions": [
+                {
+                    "type": "SkillCondition",
+                    "attribute": "Strength",
+                    "superior": true,
+                    "inferior": false,
+                    "exists": false,
+                    "equal": true,
+                    "value": 10
+                }
+            ],
             "consequences": []
         },
         {
             "order": 3,
             "title": "Choice 3",
-            "conditions": [],
+            "conditions": [
+                {
+                    "type": "InventoryCondition",
+                    "attribute": "Smartphone",
+                    "superior": false,
+                    "inferior": false,
+                    "exists": true,
+                    "equal": true
+                }
+            ],
             "consequences": []
+        },
+        {
+            "order": 4,
+            "title": "Choice 4",
+            "conditions": [],
+            "consequences": [
+                {
+                    "type": "SkillConsequence",
+                    "name": "Strength",
+                    "bonus": true,
+                    "value": 10
+                },
+                {
+                    "type": "SequenceTransitionConsequence",
+                    "name": "sample-sequence-02"
+                }
+            ]
         }
     ]
 }

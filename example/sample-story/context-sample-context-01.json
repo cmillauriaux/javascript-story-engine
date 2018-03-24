@@ -1,3 +1,6 @@
 {
-    "id": "sample-context-01"
+    "id": "sample-context-01",
+    "inventory": {
+        "Smartphone":1
+    }
 }

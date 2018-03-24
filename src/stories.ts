@@ -75,7 +75,7 @@ export class Stories {
         return clone;
     }
 
-    makeChoice(order: number): Consequence[] {
+    async makeChoice(order: number): Promise<Consequence[]> {
         if (!this.context.sequence) {
             throw new Error("Aucune séquence en cours");
         }
@@ -85,7 +85,7 @@ export class Stories {
             throw new Error("Invalid choice");
         }
 
-        engine.applyConsequences(choice.consequences, this.context);
+        await engine.applyConsequences(choice.consequences, this.context);
 
         return engine.getValidConsequences(choice.consequences, this.context);
     }

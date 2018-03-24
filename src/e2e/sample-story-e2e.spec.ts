@@ -2,6 +2,7 @@ import { Stories } from "../stories";
 import { StoryModel } from "../models/Story";
 import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
+import { Choice } from "../models/Choice";
 
 describe("sample-story End-To-End", () => {
     let stories: Stories;
@@ -21,10 +22,20 @@ describe("sample-story End-To-End", () => {
         expect(sequence).not.toBeNull();
     });
 
+    it("get choices", async () => {
+        const sequence: SequenceModel = stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.choices).not.toBeNull();
+        expect(sequence.choices.length).toBe(3);
+    });
+
     it("make first choice", async () => {
-        stories.makeChoice(1);
+        await stories.makeChoice(1);
         const strength: number = stories.context.skills.get("Strength");
         expect(strength).not.toBeNull();
         expect(strength).toBe(10);
+        const sequence: SequenceModel = stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("sample-sequence-02");
     });
 });
