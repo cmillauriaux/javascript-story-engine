@@ -42,16 +42,16 @@ export namespace StoryEngine {
             return this.context.story;
         }
 
-        async loadChapter(storyId: string, chapterId: string): Promise<SceneModel> {
+        async loadScene(storyId: string, sceneId: string): Promise<SceneModel> {
             if (!this.context.story) {
                 throw new Error("No story loaded");
             }
-            this.context.scene = await persistance.getChapter(storyId, chapterId);
-            this.context.sequence = await persistance.getSequence(storyId, this.context.scene.entrypoint);
+            this.context.scene = await persistance.getScene(storyId, sceneId);
+            this.context.sequence = await persistance.getSequence(storyId, sceneId, this.context.scene.entrypoint);
             return this.context.scene;
         }
 
-        getCurrentChapter(): SceneModel {
+        getCurrentScene(): SceneModel {
             return this.context.scene;
         }
 

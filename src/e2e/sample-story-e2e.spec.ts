@@ -1,16 +1,16 @@
-import { Stories } from "../stories";
+import { StoryEngine } from "../stories";
 import { StoryModel } from "../models/Story";
 import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
 import { Choice } from "../models/Choice";
 
 describe("sample-story End-To-End", () => {
-    let stories: Stories;
+    let stories: StoryEngine.Stories;
 
     it("load story", async () => {
-        stories = new Stories();
+        stories = new StoryEngine.Stories();
         const story: StoryModel = await stories.loadStory("sample-story");
-        const scene: SceneModel = await stories.loadChapter("sample-story", "sample-scene-01");
+        const scene: SceneModel = await stories.loadScene("sample-story", "sample-scene-01");
         expect(story).not.toBeNull();
         expect(story.id).toBe("sample-story");
         expect(scene).not.toBeNull();

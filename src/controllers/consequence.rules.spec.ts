@@ -3,6 +3,7 @@ import { Consequence } from "../models/Consequence";
 import { ConsequenceRules } from "./consequence.rules";
 import { SequenceModel } from "../models/Sequence";
 import { StoryModel } from "../models/Story";
+import { SceneModel } from "../models/Scene";
 
 describe("consequence rules", () => {
     it("applySkillConsequence bonus", async () => {
@@ -91,6 +92,8 @@ describe("consequence rules", () => {
         let context: ContextModel = new ContextModel();
         context.story = new StoryModel();
         context.story.id = "sample-story";
+        context.scene = new SceneModel();
+        context.scene.id = "sample-scene-01";
         const consequence: Consequence = new Consequence();
         consequence.name = "sample-sequence-02";
         consequence.type = "SequenceTransitionConsequence";

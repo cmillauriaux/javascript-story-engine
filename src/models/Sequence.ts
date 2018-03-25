@@ -5,7 +5,7 @@ import { Choice } from "./Choice";
 export type SequenceModel = {
     id: string;
     storyId: string;
-    chapterId: string;
+    sceneId: string;
     version: number;
     background: string;
     next: Map<string, Condition>;

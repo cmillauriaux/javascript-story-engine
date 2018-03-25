@@ -41,7 +41,7 @@ export namespace ConsequenceRules {
     }
 
     export async function applySequenceTransitionConsequence(consequence: Consequence, context: ContextModel): Promise<ContextModel> {
-        context.sequence = await new Persistance("example").getSequence(context.story.id, consequence.name);
+        context.sequence = await new Persistance("example").getSequence(context.story.id, context.scene.id, consequence.name);
         return context;
     }
 }
