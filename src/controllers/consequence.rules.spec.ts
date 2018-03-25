@@ -4,6 +4,8 @@ import { ConsequenceRules } from "./consequence.rules";
 import { SequenceModel } from "../models/Sequence";
 import { StoryModel } from "../models/Story";
 import { SceneModel } from "../models/Scene";
+import { IPersistanceAdapter } from "./persistance-adapter";
+import { PersistanceFiles } from "./persistance-files";
 
 describe("consequence rules", () => {
     it("applySkillConsequence bonus", async () => {
@@ -97,7 +99,8 @@ describe("consequence rules", () => {
         const consequence: Consequence = new Consequence();
         consequence.name = "sample-sequence-02";
         consequence.type = "SequenceTransitionConsequence";
-        context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context);
+        const persistance: IPersistanceAdapter = new PersistanceFiles("example");
+        context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context, persistance);
         const sequence: SequenceModel = context.sequence;
         expect(sequence).not.toBeNull();
         expect(sequence.id).toBe("sample-sequence-02");

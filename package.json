@@ -29,7 +29,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.1.2"
+    "@types/lokijs": "^1.5.2",
+    "async": "^2.1.2",
+    "lokijs": "^1.5.3"
   },
   "devDependencies": {
     "@types/jest": "^22.2.0",

@@ -3,12 +3,14 @@ import { StoryModel } from "../models/Story";
 import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
 import { Choice } from "../models/Choice";
+import { PersistanceFiles } from "../controllers/persistance-files";
 
 describe("sample-story End-To-End", () => {
     let stories: StoryEngine.Stories;
 
     it("load story", async () => {
         stories = new StoryEngine.Stories();
+        stories.setPersistanceAdapter(new PersistanceFiles("example"));
         const story: StoryModel = await stories.loadStory("sample-story");
         const scene: SceneModel = await stories.loadScene("sample-story", "sample-scene-01");
         expect(story).not.toBeNull();

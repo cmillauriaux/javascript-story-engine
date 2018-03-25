@@ -5,8 +5,9 @@ import { CharacterModel } from "../models/Character";
 import * as fs from "fs";
 import * as path from "path";
 import { ContextModel } from "../models/Context";
+import { IPersistanceAdapter } from "./persistance-adapter";
 
-export class Persistance {
+export class PersistanceFiles implements IPersistanceAdapter {
     private fs = require("fs");
     private rootPath: string;
 
@@ -24,6 +25,20 @@ export class Persistance {
                 resolve(data.toString());
             });
         });
+    }
+
+    async listStories(): Promise<StoryModel[]> {
+        const stories: StoryModel[] = new Array<StoryModel>();
+        // tslint:disable-next-line:max-line-length
+        const dirs: string[] = fs.readdirSync(this.rootPath).filter(f => fs.statSync(path.join(this.rootPath, f)).isDirectory());
+        for (let dir of dirs) {
+            try {
+                stories.push(await this.getStory(dir));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        return stories;
     }
 
     async listScenes(storyId: string): Promise<SceneModel[]> {

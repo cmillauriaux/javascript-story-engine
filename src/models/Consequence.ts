@@ -4,7 +4,7 @@ import { Condition } from "./Condition";
 export class Consequence {
     type: string;
     name: string;
-    bonus: Boolean;
-    value: number;
-    conditions: Condition[];
+    bonus?: Boolean;
+    value?: number;
+    conditions?: Condition[];
 }

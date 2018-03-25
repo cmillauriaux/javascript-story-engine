@@ -2,6 +2,7 @@ import { Relation } from "./Relation";
 import { StoryModel } from "./Story";
 import { SceneModel } from "./Scene";
 import { SequenceModel } from "./Sequence";
+import { IPersistanceAdapter } from "../controllers/persistance-adapter";
 
 export class ContextModel {
     id: string;

@@ -2,7 +2,7 @@ import { Condition } from "./Condition";
 import { Dialog } from "./Dialog";
 import { Choice } from "./Choice";
 
-export type SequenceModel = {
+export class SequenceModel {
     id: string;
     storyId: string;
     sceneId: string;
@@ -11,4 +11,4 @@ export type SequenceModel = {
     next: Map<string, Condition>;
     dialogs: Dialog[];
     choices: Choice[];
-};
+}

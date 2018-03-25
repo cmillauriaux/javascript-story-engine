@@ -5,6 +5,7 @@ import { SequenceModel } from "../models/Sequence";
 import { Consequence } from "../models/Consequence";
 import { ConsequenceRules } from "./consequence.rules";
 import { ConditionRules } from "./condition.rules";
+import { IPersistanceAdapter } from "./persistance-adapter";
 
 export class Engine {
     isConditionValid(condition: Condition, context: ContextModel): boolean {
@@ -75,7 +76,7 @@ export class Engine {
         return valids;
     }
 
-    async applyConsequences(consequences: Consequence[], context: ContextModel): Promise<ContextModel> {
+    async applyConsequences(consequences: Consequence[], context: ContextModel, persistance: IPersistanceAdapter): Promise<ContextModel> {
         for (let consequence of consequences) {
             if (this.isConsequenceValid(consequence, context)) {
                 let consequenceCast: Consequence;
@@ -90,7 +91,7 @@ export class Engine {
                         context = ConsequenceRules.applyRelationConsequence(consequence, context);
                         break;
                     case "SequenceTransitionConsequence":
-                        context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context);
+                        context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context, persistance);
                         break;
                     default:
                         throw new Error("Unknown consequence");

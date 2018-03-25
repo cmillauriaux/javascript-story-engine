@@ -1,6 +1,6 @@
 import { Consequence } from "../models/Consequence";
 import { ContextModel } from "../models/Context";
-import { Persistance } from "./persistance";
+import { IPersistanceAdapter } from "./persistance-adapter";
 
 export namespace ConsequenceRules {
 
@@ -40,8 +40,9 @@ export namespace ConsequenceRules {
         return context;
     }
 
-    export async function applySequenceTransitionConsequence(consequence: Consequence, context: ContextModel): Promise<ContextModel> {
-        context.sequence = await new Persistance("example").getSequence(context.story.id, context.scene.id, consequence.name);
+    // tslint:disable-next-line:max-line-length
+    export async function applySequenceTransitionConsequence(consequence: Consequence, context: ContextModel, persistance: IPersistanceAdapter): Promise<ContextModel> {
+        context.sequence = await persistance.getSequence(context.story.id, context.scene.id, consequence.name);
         return context;
     }
 }
