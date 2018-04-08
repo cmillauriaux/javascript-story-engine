@@ -58,7 +58,8 @@ export namespace StoryEngine {
                 throw new Error("No story loaded");
             }
             this.context.scene = await this.persistance.getScene(storyId, sceneId);
-            this.context.sequence = await this.persistance.getSequence(storyId, sceneId, this.context.scene.entrypoint);
+            // tslint:disable-next-line:max-line-length
+            this.context.sequence = await this.persistance.getSequence(storyId, sceneId, this.engine.getEntryPoint(this.context.scene.entrypoints, this.context));
             return this.context.scene;
         }
 

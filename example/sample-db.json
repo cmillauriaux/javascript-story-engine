@@ -71,7 +71,20 @@
                     "storyId": "sample-story",
                     "title": "Sample Scene 01",
                     "version": 8,
-                    "entrypoint": "sample-sequence-01",
+                    "entrypoints": {
+                        "sample-sequence-01": {
+                            "type": "Default"
+                        },
+                        "sample-sequence-02": {
+                            "type": "SkillCondition",
+                            "attribute": "Strength",
+                            "superior": true,
+                            "inferior": false,
+                            "exists": false,
+                            "equal": true,
+                            "value": 10
+                        }
+                    },
                     "meta": {
                         "revision": 0,
                         "created": 1521976657525,

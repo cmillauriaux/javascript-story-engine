@@ -100,4 +100,23 @@ export class Engine {
         }
         return context;
     }
+
+    getEntryPoint(entrypoints: Map<String, Condition>, context: ContextModel): string {
+        let defaut: string = "";
+        if (entrypoints) {
+            for (let entrypoint in entrypoints) {
+                if (entrypoints.hasOwnProperty(entrypoint)) {
+                    let condition: Condition = entrypoints[entrypoint];
+                    if (condition.type === "Default") {
+                        defaut = entrypoint;
+                    } else {
+                        if (this.isConditionValid(condition, context)) {
+                            return entrypoint;
+                        }
+                    }
+                }
+            }
+        }
+        return defaut;
+    }
 }
