@@ -36,14 +36,17 @@ export class PersistanceLoki implements IPersistanceAdapter {
     }
 
     async listStories(): Promise<StoryModel[]> {
+        console.log("listStories");
         return this.stories.find();
     }
 
     async listScenes(storyId: string): Promise<SceneModel[]> {
+        console.log("listScenes", storyId);
         return this.scenes.find({ storyId: storyId });
     }
 
     async listSequences(storyId: string, sceneId: string): Promise<SequenceModel[]> {
+        console.log("listSequences", storyId, sceneId);
         return this.sequences.find({ storyId: storyId, sceneId: sceneId });
     }
 

@@ -4,6 +4,7 @@ import { Choice } from "./Choice";
 
 export class SequenceModel {
     id: string;
+    title: string;
     storyId: string;
     sceneId: string;
     version: number;

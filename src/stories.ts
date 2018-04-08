@@ -46,11 +46,11 @@ export namespace StoryEngine {
         }
 
         async listCurrentStoryScenes(): Promise<SceneModel[]> {
-            return await this.persistance.listScenes(this.context.id);
+            return await this.persistance.listScenes(this.context.story.id);
         }
 
         async listCurrentSceneSequences(): Promise<SequenceModel[]> {
-            return await this.persistance.listSequences(this.context.id, this.context.scene.id);
+            return await this.persistance.listSequences(this.context.story.id, this.context.scene.id);
         }
 
         async loadScene(storyId: string, sceneId: string): Promise<SceneModel> {
