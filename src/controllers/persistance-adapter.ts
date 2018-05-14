@@ -22,4 +22,14 @@ export interface IPersistanceAdapter {
     getSequence(storyId: string, sceneId: string, sequenceId: string): Promise<SequenceModel>;
 
     getContext(storyId: string, contextId: string): Promise<ContextModel>;
+
+    exportStory(storyId: string): Promise<string>;
+
+    saveScene(storyId: string, scene: SceneModel);
+
+    saveSequence(storyId: string, sequence: SequenceModel);
+
+    saveCharacter(storyId: string, character: CharacterModel);
+
+    saveContext(storyId: string, context: ContextModel);
 }

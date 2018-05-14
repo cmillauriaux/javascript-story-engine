@@ -8,6 +8,7 @@ import * as Loki from "lokijs";
 
 export class PersistanceLoki implements IPersistanceAdapter {
     private loki: Loki;
+    private characters: Loki.Collection;
     private stories: Loki.Collection;
     private scenes: Loki.Collection;
     private sequences: Loki.Collection;
@@ -20,6 +21,10 @@ export class PersistanceLoki implements IPersistanceAdapter {
         this.stories = this.loki.getCollection("stories");
         if (this.stories == null) {
             this.stories = this.loki.addCollection("stories");
+        }
+        this.characters = this.loki.getCollection("characters");
+        if (this.characters == null) {
+            this.characters = this.loki.addCollection("characters");
         }
         this.scenes = this.loki.getCollection("scenes");
         if (this.scenes == null) {
@@ -51,7 +56,7 @@ export class PersistanceLoki implements IPersistanceAdapter {
     }
 
     async listCharacters(storyId: string): Promise<CharacterModel[]> {
-        return [];
+        return this.characters.find({ storyId: storyId });
     }
 
     async getStory(storyId: string): Promise<StoryModel> {
@@ -63,7 +68,7 @@ export class PersistanceLoki implements IPersistanceAdapter {
     }
 
     async getCharacter(storyId: string, characterId: string): Promise<CharacterModel> {
-        return null;
+        return this.characters.findOne({ id: characterId, storyId: storyId });
     }
 
     async getSequence(storyId: string, sceneId: string, sequenceId: string): Promise<SequenceModel> {
@@ -72,6 +77,42 @@ export class PersistanceLoki implements IPersistanceAdapter {
 
     async getContext(storyId: string, contextId: string): Promise<ContextModel> {
         return this.contexts.findOne();
+    }
+
+    async exportStory(storyId: string): Promise<string> {
+        return this.loki.serialize();
+    }
+
+    async saveScene(storyId: string, scene: SceneModel) {
+        if (await this.getScene(storyId, scene.id)) {
+            this.scenes.update(scene);
+        } else {
+            this.scenes.insert(scene);
+        }
+    }
+
+    async saveSequence(storyId: string, sequence: SequenceModel) {
+        if (await this.getSequence(storyId, sequence.sceneId, sequence.id)) {
+            this.sequences.update(sequence);
+        } else {
+            this.sequences.insert(sequence);
+        }
+    }
+
+    async saveCharacter(storyId: string, character: CharacterModel) {
+        if (await this.getCharacter(storyId, character.id)) {
+            this.characters.update(character);
+        } else {
+            this.characters.insert(character);
+        }
+    }
+
+    async saveContext(storyId: string, context: ContextModel) {
+        if (await this.getContext(storyId, context.id)) {
+            this.contexts.update(context);
+        } else {
+            this.contexts.insert(context);
+        }
     }
 
     /*generateTest(): void {

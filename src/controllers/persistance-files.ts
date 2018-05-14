@@ -103,4 +103,24 @@ export class PersistanceFiles implements IPersistanceAdapter {
         const story: string = await this.readFile("./" + storyId + "/context-" + contextId + ".json");
         return JSON.parse(story);
     }
+
+    async exportStory(storyId: string): Promise<string> {
+        throw new Error("Method not implemented.");
+    }
+
+    saveScene(storyId: string, scene: SceneModel) {
+        throw new Error("Method not implemented.");
+    }
+
+    saveSequence(storyId: string, sequence: SequenceModel) {
+        throw new Error("Method not implemented.");
+    }
+
+    saveCharacter(storyId: string, character: CharacterModel) {
+        throw new Error("Method not implemented.");
+    }
+
+    saveContext (storyId: string, context: ContextModel) {
+        throw new Error("Method not implemented.");
+    }
 }
