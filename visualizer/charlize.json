@@ -2,42 +2,42 @@
     "description": "Visualisation fo story : sample-story",
     "nodes": [
         {
-            "caption": "SEQUENCE-CASTLE-COURTYARD",
+            "caption": "CASTLE-COURTYARD",
             "type": "sequence",
             "id": 0
         },
         {
-            "caption": "SEQUENCE-CASTLE-SHELTER-DOOR",
+            "caption": "CASTLE-SHELTER-DOOR",
             "type": "sequence",
             "id": 1
         },
         {
-            "caption": "SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY",
+            "caption": "CASTLE-SHELTER-DOOR-GO-AWAY",
             "type": "sequence",
             "id": 2
         },
         {
-            "caption": "SEQUENCE-CASTLE-ENTRY",
+            "caption": "CASTLE-ENTRY",
             "type": "sequence",
             "id": 3
         },
         {
-            "caption": "SEQUENCE-CASTLE-MAIN-GATE",
+            "caption": "CASTLE-MAIN-GATE",
             "type": "sequence",
             "id": 4
         },
         {
-            "caption": "SEQUENCE-CASTLE-SMALL-DOOR",
+            "caption": "CASTLE-SMALL-DOOR",
             "type": "sequence",
             "id": 5
         },
         {
-            "caption": "SEQUENCE-CASTLE-SMALL-DOOR-NOTHING",
+            "caption": "CASTLE-SMALL-DOOR-NOTHING",
             "type": "sequence",
             "id": 6
         },
         {
-            "caption": "SEQUENCE-CASTLE-SMALL-DOOR-CAT",
+            "caption": "CASTLE-SMALL-DOOR-CAT",
             "type": "sequence",
             "id": 7
         }
@@ -46,67 +46,67 @@
         {
             "source": 0,
             "target": 1,
-            "caption": "CONSEQUENCE"
+            "caption": "Knock on the door of the shelter"
         },
         {
             "source": 0,
             "target": 4,
-            "caption": "CONSEQUENCE"
+            "caption": "Go back to the main gate"
         },
         {
             "source": 1,
             "target": 0,
-            "caption": "CONSEQUENCE"
+            "caption": "Nothing, sorry for the inconvenience"
         },
         {
             "source": 1,
             "target": 2,
-            "caption": "CONSEQUENCE"
+            "caption": "Hi ! I'm here to hunt monsters"
         },
         {
             "source": 2,
             "target": 0,
-            "caption": "CONSEQUENCE"
+            "caption": "I'm leaving, sorry for the inconvenience"
         },
         {
             "source": 3,
             "target": 4,
-            "caption": "CONSEQUENCE"
+            "caption": "Go to the gate"
         },
         {
             "source": 3,
             "target": 5,
-            "caption": "CONSEQUENCE"
+            "caption": "Go to the small door"
         },
         {
             "source": 4,
             "target": 0,
-            "caption": "CONSEQUENCE"
+            "caption": "Enter in the castle"
         },
         {
             "source": 4,
             "target": 3,
-            "caption": "CONSEQUENCE"
+            "caption": "Go back to the entry"
         },
         {
             "source": 5,
             "target": 7,
-            "caption": "PASS THROUGH"
+            "caption": "variable meet-the-guardian"
         },
         {
             "source": 5,
             "target": 6,
-            "caption": "PASS THROUGH"
+            "caption": "DefaultCondition undefined"
         },
         {
             "source": 6,
             "target": 3,
-            "caption": "CONSEQUENCE"
+            "caption": "Go back to the entry"
         },
         {
             "source": 7,
             "target": 3,
-            "caption": "CONSEQUENCE"
+            "caption": "Go back to the entry"
         }
     ]
 }

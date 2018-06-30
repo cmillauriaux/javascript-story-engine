@@ -12,9 +12,12 @@
         var config = {
             dataSource: 'charlize.json',
             nodeCaptionsOnByDefault: true,
-            nodeStyle: {
+            graphHeight: function () { return 2000; },
+            graphWidth: function () { return 2000; },
+            linkDistance: function () { return 30; },
+            edgeStyle: {
                 sequence: {
-                    captionSize: 12,
+                    captionSize: 5,
                 }
             }
         };

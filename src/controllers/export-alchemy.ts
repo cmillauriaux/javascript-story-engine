@@ -30,7 +30,7 @@ export class ExportAlchemy implements IExportAdapter {
                         result.edges.push({
                             "source": ids.get(sequence.id),
                             "target": ids.get(nextIdx),
-                            "caption": "PASS THROUGH"
+                            "caption": sequence.next[nextIdx].type + " " + sequence.next[nextIdx].attribute
                         })
                     }
                 }
@@ -44,7 +44,7 @@ export class ExportAlchemy implements IExportAdapter {
                                 result.edges.push({
                                     "source": ids.get(sequence.id),
                                     "target": ids.get(consequence.name),
-                                    "caption": "CONSEQUENCE"
+                                    "caption": choice.title
                                 })
                             }
                         }

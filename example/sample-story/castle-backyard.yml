@@ -1,5 +1,5 @@
 sequences:
-  - id: SEQUENCE-CASTLE-COURTYARD
+  - id: CASTLE-COURTYARD
     title: Entry of the Castle
     dialogs: 
       - text: The courtyard of the castle is completely empty.
@@ -11,13 +11,13 @@ sequences:
         title: Knock on the door of the shelter
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-SHELTER-DOOR
+            name: CASTLE-SHELTER-DOOR
       - order: 2
         title: Go back to the main gate
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-MAIN-GATE
-  - id: SEQUENCE-CASTLE-SHELTER-DOOR
+            name: CASTLE-MAIN-GATE
+  - id: CASTLE-SHELTER-DOOR
     title: Entry of the Castle
     dialogs: 
       - text: An old man suddenly opens the door
@@ -30,7 +30,7 @@ sequences:
         title: Nothing, sorry for the inconvenience
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-COURTYARD
+            name: CASTLE-COURTYARD
       - order: 2
         title: Hi ! I'm here to hunt monsters
         conditions:
@@ -43,8 +43,8 @@ sequences:
             name: meet-the-guardian
             value: true
           - type: sequence
-            name: SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY
-  - id: SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY
+            name: CASTLE-SHELTER-DOOR-GO-AWAY
+  - id: CASTLE-SHELTER-DOOR-GO-AWAY
     title: Entry of the Castle
     dialogs: 
       - character: GUARDIAN-CASTEL
@@ -55,4 +55,4 @@ sequences:
         title: I'm leaving, sorry for the inconvenience
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-COURTYARD
+            name: CASTLE-COURTYARD

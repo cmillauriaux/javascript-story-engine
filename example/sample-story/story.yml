@@ -4,4 +4,4 @@ description: Describe the file here
 story:
   id: sample-story
   title: An example story
-  entrypoint: SEQUENCE-CASTLE-ENTRY
+  entrypoint: CASTLE-ENTRY

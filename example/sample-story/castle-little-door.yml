@@ -1,18 +1,18 @@
 sequences:
-  - id: SEQUENCE-CASTLE-SMALL-DOOR
+  - id: CASTLE-SMALL-DOOR
     next:
-        SEQUENCE-CASTLE-SMALL-DOOR-OPEN:
+        CASTLE-SMALL-DOOR-OPEN:
             type: inventory
             attribute: small-door-key
             exists: true
-        SEQUENCE-CASTLE-SMALL-DOOR-CAT:
+        CASTLE-SMALL-DOOR-CAT:
             type: variable
             attribute: meet-the-guardian
             equal: true
             value: true
-        SEQUENCE-CASTLE-SMALL-DOOR-NOTHING:
+        CASTLE-SMALL-DOOR-NOTHING:
             type: DefaultCondition
-  - id: SEQUENCE-CASTLE-SMALL-DOOR-NOTHING
+  - id: CASTLE-SMALL-DOOR-NOTHING
     dialogs: 
       - text: It's an old wooden door. Nothing could move it, except for a key!
         foreground: foreground-002.jpg
@@ -21,8 +21,8 @@ sequences:
         title: Go back to the entry
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-ENTRY
-  - id: SEQUENCE-CASTLE-SMALL-DOOR-CAT
+            name: CASTLE-ENTRY
+  - id: CASTLE-SMALL-DOOR-CAT
     dialogs: 
       - text: It's an old wooden door. Nothing could move it, except for a key!
         foreground: foreground-002.jpg
@@ -33,4 +33,4 @@ sequences:
         title: Go back to the entry
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-ENTRY
+            name: CASTLE-ENTRY

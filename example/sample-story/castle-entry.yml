@@ -1,5 +1,5 @@
 sequences:
-  - id: SEQUENCE-CASTLE-ENTRY
+  - id: CASTLE-ENTRY
     title: Entry of the Castle
     dialogs: 
       - text: You are standing in front of the entrance to a gloomy castle.
@@ -13,13 +13,13 @@ sequences:
         title: Go to the gate
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-MAIN-GATE
+            name: CASTLE-MAIN-GATE
       - order: 2
         title: Go to the small door
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-SMALL-DOOR
-  - id: SEQUENCE-CASTLE-MAIN-GATE
+            name: CASTLE-SMALL-DOOR
+  - id: CASTLE-MAIN-GATE
     title: Entry of the Castle
     dialogs: 
       - text: You can see the interior of the castle's courtyard in the darkness.
@@ -31,9 +31,9 @@ sequences:
         title: Enter in the castle
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-COURTYARD
+            name: CASTLE-COURTYARD
       - order: 2
         title: Go back to the entry
         consequences:
           - type: sequence
-            name: SEQUENCE-CASTLE-ENTRY
+            name: CASTLE-ENTRY

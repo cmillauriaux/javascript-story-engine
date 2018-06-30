@@ -8,7 +8,7 @@ describe("loader yml", () => {
             story:
                 id: STORY-001
                 title: An example story
-                entrypoint: SEQUENCE-001
+                entrypoint: 001
         `)
         const story = await persistance.getStory("STORY-001");
         expect(story).not.toBeNull();
