@@ -1,0 +1,7 @@
+---
+description: Describe the file here
+
+story:
+  id: STORY-001
+  title: An example story
+  entrypoint: SCENE-001

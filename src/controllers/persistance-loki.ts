@@ -15,9 +15,11 @@ export class PersistanceLoki implements IPersistanceAdapter {
     private contexts: Loki.Collection;
     private rootPath: string;
 
-    constructor(json: string) {
+    constructor(json?: string) {
         this.loki = new Loki("story.db");
-        this.loki.loadJSON(json);
+        if (json) {
+            this.loki.loadJSON(json);
+        }
         this.stories = this.loki.getCollection("stories");
         if (this.stories == null) {
             this.stories = this.loki.addCollection("stories");

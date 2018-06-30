@@ -5,7 +5,6 @@ import { SequenceModel } from "../models/Sequence";
 import { StoryModel } from "../models/Story";
 import { SceneModel } from "../models/Scene";
 import { IPersistanceAdapter } from "./persistance-adapter";
-import { PersistanceFiles } from "./persistance-files";
 
 describe("consequence rules", () => {
     it("applySkillConsequence bonus", async () => {

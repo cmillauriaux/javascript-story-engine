@@ -1,0 +1,50 @@
+---
+description: Describe the file here
+
+sequences:
+  - id: SEQUENCE-001
+    title: Sample Sequence 01
+    background: background-001.jpg
+    dialogs: 
+      - character: CHARACTER-001
+        text: This a dialog with Character 01
+        foreground: foreground-001.jpg
+      - character: CHARACTER-001
+        text: This a dialog with Character 01
+        foreground: foreground-002.jpg
+      - character: CHARACTER-002
+        text: This a dialog with Character 02
+        foreground: foreground-003.jpg
+    choices: 
+      - order: 1
+        title: Choice 01
+        conditions:
+          - type: 
+            attribute: strength
+            inferior: true
+            equal: true
+            value: 10
+          - type: 
+            attribute: camera
+            exists: true
+        consequences:
+          - type: SkillConsequence
+            name: strength
+            bonus: true
+            value: 5
+            conditions:
+              - type: 
+                attribute: strength
+                inferior: true
+                equal: true
+                value: 10
+          - type: InventoryConsequence
+            name: camera
+            bonus: true
+          - type: RelationConsequence
+            name: CHARACTER-001
+            attribute: confidence
+            bonus: true
+            value: 2
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-002

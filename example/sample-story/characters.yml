@@ -1,0 +1,18 @@
+---
+description: Describe the file here
+
+characters:
+  - id: CHARACTER-001
+    name: Character Name
+    caracteristics:
+      - id: CARACTERISTIC-001
+        value: 10
+      - id: CARACTERISTIC-002
+        value: true
+      - id: CARACTERISTIC-003
+        value: "It's a string characteristic"
+  - id: CHARACTER-002
+    name: Character Name
+    caracteristics:
+      - id: CARACTERISTIC-001
+        value: 5

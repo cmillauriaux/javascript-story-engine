@@ -1,13 +1,13 @@
-import { StoryEngine } from "./stories";
-import { StoryModel } from "./models/Story";
 import { SceneModel } from "./models/Scene";
 import { SequenceModel } from "./models/Sequence";
-import { PersistanceFiles } from "./controllers/persistance-files";
+import { StoryModel } from "./models/Story";
+import { StoryEngine } from "./stories";
+import { PersistanceLoki } from "./controllers/persistance-loki";
 
 describe("stories", () => {
     it("load story", async () => {
         const stories: StoryEngine.Stories = new StoryEngine.Stories();
-        stories.setPersistanceAdapter(new PersistanceFiles("example"));
+        stories.setPersistanceAdapter(new PersistanceLoki());
         const story: StoryModel = await stories.loadStory("sample-story");
         expect(story).not.toBeNull();
         expect(story.id).toBe("sample-story");
@@ -15,7 +15,7 @@ describe("stories", () => {
 
     it("get current story", async () => {
         const stories: StoryEngine.Stories = new StoryEngine.Stories();
-        stories.setPersistanceAdapter(new PersistanceFiles("example"));
+        stories.setPersistanceAdapter(new PersistanceLoki());
         await stories.loadStory("sample-story");
         const story: StoryModel = stories.getCurrentStory();
         expect(story).not.toBeNull();
@@ -24,7 +24,7 @@ describe("stories", () => {
 
     it("load scene", async () => {
         const stories: StoryEngine.Stories = new StoryEngine.Stories();
-        stories.setPersistanceAdapter(new PersistanceFiles("example"));
+        stories.setPersistanceAdapter(new PersistanceLoki());
         await stories.loadStory("sample-story");
         const scene: SceneModel = await stories.loadScene("sample-story", "sample-scene-01");
         expect(scene).not.toBeNull();
@@ -33,7 +33,7 @@ describe("stories", () => {
 
     it("get current scene", async () => {
         const stories: StoryEngine.Stories = new StoryEngine.Stories();
-        stories.setPersistanceAdapter(new PersistanceFiles("example"));
+        stories.setPersistanceAdapter(new PersistanceLoki());
         await stories.loadStory("sample-story");
         await stories.loadScene("sample-story", "sample-scene-01");
         const scene: SceneModel = await stories.getCurrentScene();
@@ -43,7 +43,7 @@ describe("stories", () => {
 
     it("get current sequence", async () => {
         const stories: StoryEngine.Stories = new StoryEngine.Stories();
-        stories.setPersistanceAdapter(new PersistanceFiles("example"));
+        stories.setPersistanceAdapter(new PersistanceLoki());
         await stories.loadStory("sample-story");
         await stories.loadScene("sample-story", "sample-scene-01");
         const sequence: SequenceModel = await stories.getCurrentSequence();
