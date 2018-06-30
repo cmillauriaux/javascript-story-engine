@@ -2,6 +2,6 @@
 description: Describe the file here
 
 story:
-  id: STORY-001
+  id: sample-story
   title: An example story
-  entrypoint: SCENE-001
+  entrypoint: SEQUENCE-CASTLE-ENTRY

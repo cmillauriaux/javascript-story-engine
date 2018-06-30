@@ -3,8 +3,10 @@ import { Consequence } from "../models/Consequence";
 import { ConsequenceRules } from "./consequence.rules";
 import { SequenceModel } from "../models/Sequence";
 import { StoryModel } from "../models/Story";
-import { SceneModel } from "../models/Scene";
 import { IPersistanceAdapter } from "./persistance-adapter";
+import { PersistanceLoki } from "./persistance-loki";
+import { LoaderYML } from "./loader-yml";
+import { StoryEngine } from "../stories";
 
 describe("consequence rules", () => {
     it("applySkillConsequence bonus", async () => {
@@ -90,15 +92,29 @@ describe("consequence rules", () => {
     });
 
     it("applySequenceTransitionConsequence", async () => {
+        const stories = new StoryEngine.Stories();
+        const persistance = new PersistanceLoki();
+        await persistance.saveStory({
+            id: "sample-story",
+            entrypoint: "sample-sequence-01",
+            title: "Sample story",
+            version: 1
+        });
+        await persistance.saveSequence("sample-story", {
+            id: "sample-sequence-02",
+            title: "Sequence 02",
+            storyId: "sample-story",
+            choices: [],
+            dialogs: [],
+            next: new Map()
+        });
+        stories.setPersistanceAdapter(persistance);
         let context: ContextModel = new ContextModel();
         context.story = new StoryModel();
         context.story.id = "sample-story";
-        context.scene = new SceneModel();
-        context.scene.id = "sample-scene-01";
         const consequence: Consequence = new Consequence();
         consequence.name = "sample-sequence-02";
         consequence.type = "SequenceTransitionConsequence";
-        const persistance: IPersistanceAdapter = new PersistanceFiles("example");
         context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context, persistance);
         const sequence: SequenceModel = context.sequence;
         expect(sequence).not.toBeNull();

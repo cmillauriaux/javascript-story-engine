@@ -1,6 +1,5 @@
 import { PersistanceLoki } from "./persistance-loki";
 import { StoryModel } from "../models/Story";
-import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
 import { CharacterModel } from "../models/Character";
 import { ContextModel } from "../models/Context";
@@ -34,16 +33,9 @@ describe("persistance Lokijs", () => {
         expect(story.id).toBe("sample-story");
     });
 
-    it("load scene", async () => {
-        const persistance: PersistanceLoki = new PersistanceLoki(JSONStory);
-        const scene: SceneModel = await persistance.getScene("sample-story", "sample-scene-01");
-        expect(scene).not.toBeNull();
-        expect(scene.id).toBe("sample-scene-01");
-    });
-
     it("load sequence", async () => {
         const persistance: PersistanceLoki = new PersistanceLoki(JSONStory);
-        const sequence: SequenceModel = await persistance.getSequence("sample-story", "sample-scene-01", "sample-sequence-01");
+        const sequence: SequenceModel = await persistance.getSequence("sample-story", "sample-sequence-01");
         expect(sequence).not.toBeNull();
         expect(sequence.id).toBe("sample-sequence-01");
     });
@@ -62,16 +54,10 @@ describe("persistance Lokijs", () => {
         expect(stories.length).toBe(1);
     });
 
-    it("load scenes", async () => {
-        const persistance: PersistanceLoki = new PersistanceLoki(JSONStory);
-        const scenes: SceneModel[] = await persistance.listScenes("sample-story");
-        expect(scenes).not.toBeNull();
-        expect(scenes.length).toBe(1);
-    });
 
     it("load sequences", async () => {
         const persistance: PersistanceLoki = new PersistanceLoki(JSONStory);
-        const sequences: SequenceModel[] = await persistance.listSequences("sample-story", "sample-scene-01");
+        const sequences: SequenceModel[] = await persistance.listSequences("sample-story");
         expect(sequences).not.toBeNull();
         expect(sequences.length).toBe(2);
     });

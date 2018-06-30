@@ -4,10 +4,11 @@ import * as yaml from "js-yaml";
 import * as fs from "fs";
 import * as path from "path";
 import { StoryModel } from "../models/Story";
+import { CharacterModel } from "../models/Character";
 
 export class LoaderYML implements ILoaderAdapter {
 
-    loadFiles(persistance: IPersistanceAdapter, args: string): IPersistanceAdapter {
+    async loadFiles(persistance: IPersistanceAdapter, args: string): Promise<IPersistanceAdapter> {
         let docs = [];
 
         if (!args || !this.isFileExists(args)) {
@@ -25,10 +26,10 @@ export class LoaderYML implements ILoaderAdapter {
             }
         }
 
-        return this.loadElements(persistance, docs);
+        return await this.loadElements(persistance, docs);
     }
 
-    load(persistance: IPersistanceAdapter, args: string): IPersistanceAdapter {
+    async load(persistance: IPersistanceAdapter, args: string): Promise<IPersistanceAdapter> {
         let docs = [];
 
         if (!args) {
@@ -40,15 +41,16 @@ export class LoaderYML implements ILoaderAdapter {
             docs.push(doc);
         }
 
-        return this.loadElements(persistance, docs);
+        return await this.loadElements(persistance, docs);
     }
 
-    private loadElements(persistance: IPersistanceAdapter, docs: object[]): IPersistanceAdapter {
+    private async loadElements(persistance: IPersistanceAdapter, docs: object[]): Promise<IPersistanceAdapter> {
         // For each document, find a story
         let story : StoryModel;
         for (let doc of docs) {
             if (doc["story"]) {
-                story = doc["story"] as StoryModel;
+                story = doc["story"];
+                await persistance.saveStory(story);
             }
         }
 
@@ -60,18 +62,21 @@ export class LoaderYML implements ILoaderAdapter {
         for (let doc of docs) {
             if (doc["characters"]) {
                 for (let character of doc["characters"]) {
-                    persistance.saveCharacter(story.id, character);
+                    character["storyId"] = story.id
+                    await persistance.saveCharacter(story.id, character);
                 }
             }
 
             if (doc["sequences"]) {
                 for (let sequence of doc["sequences"]) {
-                    persistance.saveSequence(story.id, sequence);
+                    sequence["storyId"] = story.id
+                    await persistance.saveSequence(story.id, sequence);
                 }
             }
 
             if (doc["context"]) {
-                persistance.saveContext(story.id, doc["context"]);
+                doc["context"]["storyId"] = story.id
+                await persistance.saveContext(story.id, doc["context"]);
             }
         }
 

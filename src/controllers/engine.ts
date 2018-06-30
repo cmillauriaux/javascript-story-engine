@@ -34,9 +34,11 @@ export class Engine {
     }
 
     isChoiceValid(choice: Choice, context: ContextModel): Boolean {
-        for (let condition of choice.conditions) {
-            if (!this.isConditionValid(condition, context)) {
-                return false;
+        if (choice.conditions) {
+            for (let condition of choice.conditions) {
+                if (!this.isConditionValid(condition, context)) {
+                    return false;
+                }
             }
         }
 

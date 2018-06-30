@@ -2,49 +2,59 @@
 description: Describe the file here
 
 sequences:
-  - id: SEQUENCE-001
-    title: Sample Sequence 01
-    background: background-001.jpg
+  - id: SEQUENCE-CASTLE-ENTRY
+    title: Entry of the Castle
     dialogs: 
-      - character: CHARACTER-001
-        text: This a dialog with Character 01
+      - text: You are standing in front of the entrance to a gloomy castle.
         foreground: foreground-001.jpg
-      - character: CHARACTER-001
-        text: This a dialog with Character 01
-        foreground: foreground-002.jpg
-      - character: CHARACTER-002
-        text: This a dialog with Character 02
-        foreground: foreground-003.jpg
+      - text: There is no one around, no light, no sound.
+        foreground: foreground-001.jpg
+      - text: The main gate of the castle faces you, waiting for you. You also see a small door in what looks like the moat remains.
+        foreground: foreground-001.jpg
     choices: 
       - order: 1
-        title: Choice 01
-        conditions:
-          - type: 
-            attribute: strength
-            inferior: true
-            equal: true
-            value: 10
-          - type: 
-            attribute: camera
-            exists: true
+        title: Go to the gate
         consequences:
-          - type: SkillConsequence
-            name: strength
-            bonus: true
-            value: 5
-            conditions:
-              - type: 
-                attribute: strength
-                inferior: true
-                equal: true
-                value: 10
-          - type: InventoryConsequence
-            name: camera
-            bonus: true
-          - type: RelationConsequence
-            name: CHARACTER-001
-            attribute: confidence
-            bonus: true
-            value: 2
           - type: SequenceTransitionConsequence
-            name: SEQUENCE-002
+            name: SEQUENCE-CASTLE-MAIN-GATE
+      - order: 2
+        title: Go to the small door
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-SMALL-DOOR
+  - id: SEQUENCE-CASTLE-MAIN-GATE
+    title: Entry of the Castle
+    dialogs: 
+      - text: You can see the interior of the castle's courtyard in the darkness.
+        foreground: foreground-002.jpg
+      - text: Seule la flamme d'une bougie semble briller derrière une fenêtre en pierre
+        foreground: foreground-001.jpg
+    choices: 
+      - order: 1
+        title: Enter in the castle
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-COURTYARD
+      - order: 2
+        title: Go back to the entry
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-ENTRY
+  - id: SEQUENCE-CASTLE-COURTYARD
+    title: Entry of the Castle
+    dialogs: 
+      - text: The courtyard of the castle is completely empty.
+        foreground: foreground-002.jpg
+      - text: But now you can clearly see the light of a candle illuminating a small shelter embedded in the wall.
+        foreground: foreground-001.jpg
+    choices: 
+      - order: 1
+        title: Knock on the door of the shelter
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-SHELTER-DOOR
+      - order: 2
+        title: Go back to the main gate
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-MAIN-GATE

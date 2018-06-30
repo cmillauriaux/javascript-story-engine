@@ -6,9 +6,8 @@ export class SequenceModel {
     id: string;
     title: string;
     storyId: string;
-    sceneId: string;
-    version: number;
-    background: string;
+    version?: number;
+    background?: string;
     next: Map<string, Condition>;
     dialogs: Dialog[];
     choices: Choice[];

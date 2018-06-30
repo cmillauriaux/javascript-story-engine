@@ -4,12 +4,11 @@ import { PersistanceLoki } from "./persistance-loki";
 describe("loader yml", () => {
     it("load story", async () => {
         const loader = new LoaderYML();
-        const persistance = new PersistanceLoki();
-        loader.load(persistance, `
+        const persistance = await loader.load(new PersistanceLoki(), `
             story:
                 id: STORY-001
                 title: An example story
-                entrypoint: SCENE-001
+                entrypoint: SEQUENCE-001
         `)
         const story = await persistance.getStory("STORY-001");
         expect(story).not.toBeNull();
@@ -18,10 +17,9 @@ describe("loader yml", () => {
 
     it("load story from files", async () => {
         const loader = new LoaderYML();
-        const persistance = new PersistanceLoki();
-        loader.loadFiles(persistance, "example/sample-story")
-        const story = await persistance.getStory("STORY-001");
+        const persistance = await loader.loadFiles(new PersistanceLoki(), "./example/sample-story")
+        const story = await persistance.getStory("sample-story");
         expect(story).not.toBeNull();
-        expect(story.id).toBe("STORY-001");
+        expect(story.id).toBe("sample-story");
     });
 });

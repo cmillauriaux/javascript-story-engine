@@ -42,7 +42,7 @@ export namespace ConsequenceRules {
 
     // tslint:disable-next-line:max-line-length
     export async function applySequenceTransitionConsequence(consequence: Consequence, context: ContextModel, persistance: IPersistanceAdapter): Promise<ContextModel> {
-        context.sequence = await persistance.getSequence(context.story.id, context.scene.id, consequence.name);
+        context.sequence = await persistance.getSequence(context.story.id, consequence.name);
         return context;
     }
 }

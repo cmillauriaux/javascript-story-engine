@@ -1,5 +1,5 @@
 export type Dialog = {
-    character: string;
+    character?: string;
     text: string;
     foreground: string;
 };

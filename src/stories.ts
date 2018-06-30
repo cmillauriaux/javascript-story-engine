@@ -1,7 +1,6 @@
 import { SequenceModel } from "./models/Sequence";
 import { StoryModel } from "./models/Story";
 import { IPersistanceAdapter } from "./controllers/persistance-adapter";
-import { SceneModel } from "./models/Scene";
 import { Consequence } from "./models/Consequence";
 import { Engine } from "./controllers/engine";
 import { Choice } from "./models/Choice";
@@ -21,7 +20,6 @@ export namespace StoryEngine {
                 skills: new Map<String, number>(),
                 inventory: new Map<String, number>(),
                 story: null,
-                scene: null,
                 sequence: null,
                 currentDialog: 0,
             };
@@ -34,6 +32,9 @@ export namespace StoryEngine {
         async loadStory(storyId: string): Promise<StoryModel> {
             this.initContext();
             this.context.story = await this.persistance.getStory(storyId);
+
+            this.context.sequence = await this.persistance.getSequence(storyId, this.context.story.entrypoint);
+
             return this.context.story;
         }
 
@@ -43,28 +44,6 @@ export namespace StoryEngine {
 
         async listBasepathStories(): Promise<StoryModel[]> {
             return await this.persistance.listStories();
-        }
-
-        async listCurrentStoryScenes(): Promise<SceneModel[]> {
-            return await this.persistance.listScenes(this.context.story.id);
-        }
-
-        async listCurrentSceneSequences(): Promise<SequenceModel[]> {
-            return await this.persistance.listSequences(this.context.story.id, this.context.scene.id);
-        }
-
-        async loadScene(storyId: string, sceneId: string): Promise<SceneModel> {
-            if (!this.context.story) {
-                throw new Error("No story loaded");
-            }
-            this.context.scene = await this.persistance.getScene(storyId, sceneId);
-            // tslint:disable-next-line:max-line-length
-            this.context.sequence = await this.persistance.getSequence(storyId, sceneId, this.engine.getEntryPoint(this.context.scene.entrypoints, this.context));
-            return this.context.scene;
-        }
-
-        getCurrentScene(): SceneModel {
-            return this.context.scene;
         }
 
         getCurrentSequence(): SequenceModel {
@@ -79,9 +58,11 @@ export namespace StoryEngine {
             clone.choices = [];
             for (let choice of sequence.choices) {
                 let choiceValid: Boolean = true;
-                for (let condition of choice.conditions) {
-                    if (!this.engine.isConditionValid(condition, this.context)) {
-                        choiceValid = false;
+                if (choice.conditions) {
+                    for (let condition of choice.conditions) {
+                        if (!this.engine.isConditionValid(condition, this.context)) {
+                            choiceValid = false;
+                        }
                     }
                 }
                 if (choiceValid) {

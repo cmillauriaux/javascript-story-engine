@@ -1,6 +1,6 @@
 export class StoryModel {
     id: string;
     title: string;
-    version: number;
+    version?: number;
     entrypoint: string;
 }

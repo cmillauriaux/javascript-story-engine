@@ -1,22 +1,21 @@
 import { StoryEngine } from "../stories";
 import { StoryModel } from "../models/Story";
-import { SceneModel } from "../models/Scene";
 import { SequenceModel } from "../models/Sequence";
 import { Choice } from "../models/Choice";
-import { PersistanceFiles } from "../controllers/persistance-files";
+import { PersistanceLoki } from "../controllers/persistance-loki";
+import { LoaderYML } from "../controllers/loader-yml";
 
 describe("sample-story End-To-End", () => {
     let stories: StoryEngine.Stories;
 
     it("load story", async () => {
+        const loader = new LoaderYML();
+        const persistance = await loader.loadFiles(new PersistanceLoki(), "./example/sample-story");
         stories = new StoryEngine.Stories();
-        stories.setPersistanceAdapter(new PersistanceFiles("example"));
+        stories.setPersistanceAdapter(persistance);
         const story: StoryModel = await stories.loadStory("sample-story");
-        const scene: SceneModel = await stories.loadScene("sample-story", "sample-scene-01");
         expect(story).not.toBeNull();
         expect(story.id).toBe("sample-story");
-        expect(scene).not.toBeNull();
-        expect(scene.id).toBe("sample-scene-01");
     });
 
     it("read first sequence", async () => {
@@ -28,16 +27,13 @@ describe("sample-story End-To-End", () => {
         const sequence: SequenceModel = stories.getCurrentSequence();
         expect(sequence).not.toBeNull();
         expect(sequence.choices).not.toBeNull();
-        expect(sequence.choices.length).toBe(3);
+        expect(sequence.choices.length).toBe(2);
     });
 
     it("make first choice", async () => {
         await stories.makeChoice(1);
-        const strength: number = stories.context.skills.get("Strength");
-        expect(strength).not.toBeNull();
-        expect(strength).toBe(10);
         const sequence: SequenceModel = stories.getCurrentSequence();
         expect(sequence).not.toBeNull();
-        expect(sequence.id).toBe("sample-sequence-02");
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-MAIN-GATE");
     });
 });
