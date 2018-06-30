@@ -1,0 +1,112 @@
+{
+    "description": "Visualisation fo story : sample-story",
+    "nodes": [
+        {
+            "caption": "SEQUENCE-CASTLE-COURTYARD",
+            "type": "sequence",
+            "id": 0
+        },
+        {
+            "caption": "SEQUENCE-CASTLE-SHELTER-DOOR",
+            "type": "sequence",
+            "id": 1
+        },
+        {
+            "caption": "SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY",
+            "type": "sequence",
+            "id": 2
+        },
+        {
+            "caption": "SEQUENCE-CASTLE-ENTRY",
+            "type": "sequence",
+            "id": 3
+        },
+        {
+            "caption": "SEQUENCE-CASTLE-MAIN-GATE",
+            "type": "sequence",
+            "id": 4
+        },
+        {
+            "caption": "SEQUENCE-CASTLE-SMALL-DOOR",
+            "type": "sequence",
+            "id": 5
+        },
+        {
+            "caption": "SEQUENCE-CASTLE-SMALL-DOOR-NOTHING",
+            "type": "sequence",
+            "id": 6
+        },
+        {
+            "caption": "SEQUENCE-CASTLE-SMALL-DOOR-CAT",
+            "type": "sequence",
+            "id": 7
+        }
+    ],
+    "edges": [
+        {
+            "source": 0,
+            "target": 1,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 0,
+            "target": 4,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 1,
+            "target": 0,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 1,
+            "target": 2,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 2,
+            "target": 0,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 3,
+            "target": 4,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 3,
+            "target": 5,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 4,
+            "target": 0,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 4,
+            "target": 3,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 5,
+            "target": 7,
+            "caption": "PASS THROUGH"
+        },
+        {
+            "source": 5,
+            "target": 6,
+            "caption": "PASS THROUGH"
+        },
+        {
+            "source": 6,
+            "target": 3,
+            "caption": "CONSEQUENCE"
+        },
+        {
+            "source": 7,
+            "target": 3,
+            "caption": "CONSEQUENCE"
+        }
+    ]
+}
