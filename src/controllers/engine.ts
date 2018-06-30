@@ -81,6 +81,7 @@ export class Engine {
     }
 
     async applyConsequences(consequences: Consequence[], context: ContextModel, persistance: IPersistanceAdapter): Promise<ContextModel> {
+        let passThroughConsequences : Consequence;
         for (let consequence of consequences) {
             if (this.isConsequenceValid(consequence, context)) {
                 let consequenceCast: Consequence;
@@ -99,12 +100,29 @@ export class Engine {
                         break;
                     case "SequenceTransitionConsequence":
                         context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context, persistance);
+                        // Manage with passtrough sequences
+                        if (context.sequence.next && context.sequence.next.size > 0) {
+                            for (let conditionIdx in context.sequence.next) {
+                                let condition = context.sequence.next.get(conditionIdx);
+                                if (this.isConditionValid(condition, context) || condition.type === "DefaultCondition") {
+                                    passThroughConsequences = {
+                                        type: "SequenceTransitionConsequence",
+                                        name: conditionIdx
+                                    };
+                                }
+                            }
+                        }
                         break;
                     default:
                         throw new Error("Unknown consequence");
                 }
             }
         }
+
+        if (passThroughConsequences) {
+            return this.applyConsequences([passThroughConsequences], context, persistance);
+        }
+
         return context;
     }
 
