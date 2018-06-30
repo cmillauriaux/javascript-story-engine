@@ -11,16 +11,16 @@ export class Engine {
     isConditionValid(condition: Condition, context: ContextModel): boolean {
         let consequenceCast: Consequence;
         switch (condition.type) {
-            case "SkillCondition":
+            case "skill":
                 return ConditionRules.applySkillCondition(condition, context);
-            case "InventoryCondition":
+            case "inventory":
                 return ConditionRules.applyInventoryCondition(condition, context);
-            case "VariableCondition":
+            case "variable":
                 return ConditionRules.applyVariableCondition(condition, context);
-            case "RelationCondition":
+            case "relation":
                 return ConditionRules.applyRelationCondition(condition, context);
             default:
-                throw new Error("Unknown consequence");
+                throw new Error("Unknown condition");
         }
     }
 
@@ -86,29 +86,30 @@ export class Engine {
             if (this.isConsequenceValid(consequence, context)) {
                 let consequenceCast: Consequence;
                 switch (consequence.type) {
-                    case "SkillConsequence":
+                    case "skill":
                         context = ConsequenceRules.applySkillConsequence(consequence, context);
                         break;
-                    case "InventoryConsequence":
+                    case "inventory":
                         context = ConsequenceRules.applyInventoryConsequence(consequence, context);
                         break;
-                    case "VariableConsequence":
+                    case "variable":
                         context = ConsequenceRules.applyVariableConsequence(consequence, context);
                         break;
-                    case "RelationConsequence":
+                    case "relation":
                         context = ConsequenceRules.applyRelationConsequence(consequence, context);
                         break;
-                    case "SequenceTransitionConsequence":
+                    case "sequence":
                         context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context, persistance);
                         // Manage with passtrough sequences
-                        if (context.sequence.next && context.sequence.next.size > 0) {
+                        if (context.sequence.next) {
                             for (let conditionIdx in context.sequence.next) {
-                                let condition = context.sequence.next.get(conditionIdx);
-                                if (this.isConditionValid(condition, context) || condition.type === "DefaultCondition") {
+                                let condition = context.sequence.next[conditionIdx];
+                                if (condition.type === "DefaultCondition" || this.isConditionValid(condition, context)) {
                                     passThroughConsequences = {
-                                        type: "SequenceTransitionConsequence",
+                                        type: "sequence",
                                         name: conditionIdx
                                     };
+                                    break;
                                 }
                             }
                         }

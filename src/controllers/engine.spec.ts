@@ -3,12 +3,12 @@ import { Condition } from "../models/Condition";
 import { Engine } from "./engine";
 
 describe("engine", () => {
-    it("isConditionValid SkillCondition", async () => {
+    it("isConditionValid skill", async () => {
         let context: ContextModel = new ContextModel();
         context.skills = new Map<String, number>();
         context.skills.set("Strength", 10);
         const condition: Condition = new Condition();
-        condition.type = "SkillCondition";
+        condition.type = "skill";
         condition.attribute = "Strength";
         condition.exists = true;
         const engine: Engine = new Engine();

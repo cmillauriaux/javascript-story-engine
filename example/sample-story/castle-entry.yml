@@ -12,12 +12,12 @@ sequences:
       - order: 1
         title: Go to the gate
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-MAIN-GATE
       - order: 2
         title: Go to the small door
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-SMALL-DOOR
   - id: SEQUENCE-CASTLE-MAIN-GATE
     title: Entry of the Castle
@@ -30,10 +30,10 @@ sequences:
       - order: 1
         title: Enter in the castle
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-COURTYARD
       - order: 2
         title: Go back to the entry
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-ENTRY

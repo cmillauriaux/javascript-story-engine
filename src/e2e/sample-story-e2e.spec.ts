@@ -25,6 +25,18 @@ describe("sample-story End-To-End", () => {
         expect(sequence.choices).not.toBeNull();
         expect(sequence.choices.length).toBe(2);
 
+        // Go to the small door
+        await stories.makeChoice(2);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-SMALL-DOOR-NOTHING");
+
+        // Go back the entry
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-ENTRY");
+
         // Go to main gate
         await stories.makeChoice(1);
         sequence = await stories.getCurrentSequence();
@@ -84,5 +96,25 @@ describe("sample-story End-To-End", () => {
         expect(sequence.id).toBe("SEQUENCE-CASTLE-SHELTER-DOOR");
         expect(sequence.choices).not.toBeNull();
         expect(sequence.choices.length).toBe(1);
+
+        // Go back to the entry
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-COURTYARD");
+        await stories.makeChoice(2);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-MAIN-GATE");
+        await stories.makeChoice(2);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-ENTRY");
+
+        // Go to the small door
+        await stories.makeChoice(2);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-SMALL-DOOR-CAT");
     });
 });

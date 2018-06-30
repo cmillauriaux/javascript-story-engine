@@ -10,12 +10,12 @@ sequences:
       - order: 1
         title: Knock on the door of the shelter
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-SHELTER-DOOR
       - order: 2
         title: Go back to the main gate
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-MAIN-GATE
   - id: SEQUENCE-CASTLE-SHELTER-DOOR
     title: Entry of the Castle
@@ -29,20 +29,20 @@ sequences:
       - order: 1
         title: Nothing, sorry for the inconvenience
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-COURTYARD
       - order: 2
         title: Hi ! I'm here to hunt monsters
         conditions:
-          - type: VariableCondition
+          - type: variable
             attribute: meet-the-guardian
             not: true
             value: true
         consequences:
-          - type: VariableConsequence
+          - type: variable
             name: meet-the-guardian
             value: true
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY
   - id: SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY
     title: Entry of the Castle
@@ -54,5 +54,5 @@ sequences:
       - order: 1
         title: I'm leaving, sorry for the inconvenience
         consequences:
-          - type: SequenceTransitionConsequence
+          - type: sequence
             name: SEQUENCE-CASTLE-COURTYARD

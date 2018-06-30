@@ -2,13 +2,35 @@ sequences:
   - id: SEQUENCE-CASTLE-SMALL-DOOR
     next:
         SEQUENCE-CASTLE-SMALL-DOOR-OPEN:
-            type: InventoryCondition
+            type: inventory
             attribute: small-door-key
             exists: true
         SEQUENCE-CASTLE-SMALL-DOOR-CAT:
-            type: VariableCondition
+            type: variable
             attribute: meet-the-guardian
             equal: true
             value: true
         SEQUENCE-CASTLE-SMALL-DOOR-NOTHING:
             type: DefaultCondition
+  - id: SEQUENCE-CASTLE-SMALL-DOOR-NOTHING
+    dialogs: 
+      - text: It's an old wooden door. Nothing could move it, except for a key!
+        foreground: foreground-002.jpg
+    choices: 
+      - order: 1
+        title: Go back to the entry
+        consequences:
+          - type: sequence
+            name: SEQUENCE-CASTLE-ENTRY
+  - id: SEQUENCE-CASTLE-SMALL-DOOR-CAT
+    dialogs: 
+      - text: It's an old wooden door. Nothing could move it, except for a key!
+        foreground: foreground-002.jpg
+      - text: A small object catches your eye. A cat collar. Maybe that of the guardian's cat?
+        foreground: foreground-002.jpg
+    choices: 
+      - order: 1
+        title: Go back to the entry
+        consequences:
+          - type: sequence
+            name: SEQUENCE-CASTLE-ENTRY
