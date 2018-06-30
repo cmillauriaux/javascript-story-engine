@@ -18,22 +18,71 @@ describe("sample-story End-To-End", () => {
         expect(story.id).toBe("sample-story");
     });
 
-    it("read first sequence", async () => {
-        const sequence: SequenceModel = await stories.getCurrentSequence();
-        expect(sequence).not.toBeNull();
-    });
-
-    it("get choices", async () => {
-        const sequence: SequenceModel = stories.getCurrentSequence();
+    it("Play", async () => {
+        // Entry
+        let sequence: SequenceModel = await stories.getCurrentSequence();
         expect(sequence).not.toBeNull();
         expect(sequence.choices).not.toBeNull();
         expect(sequence.choices.length).toBe(2);
-    });
 
-    it("make first choice", async () => {
+        // Go to main gate
         await stories.makeChoice(1);
-        const sequence: SequenceModel = stories.getCurrentSequence();
+        sequence = await stories.getCurrentSequence();
         expect(sequence).not.toBeNull();
         expect(sequence.id).toBe("SEQUENCE-CASTLE-MAIN-GATE");
+
+        // Return to entry
+        await stories.makeChoice(2);
+        sequence = stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-ENTRY");
+
+        // Go to the courtyard, throw the main gate
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-MAIN-GATE");
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-COURTYARD");
+
+        // Go to the door
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-SHELTER-DOOR");
+
+        // Speek to the guardian and go back
+        expect(sequence.choices).not.toBeNull();
+        expect(sequence.choices.length).toBe(2);
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-COURTYARD");
+
+        // Speek to the guardian again
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-SHELTER-DOOR");
+        expect(sequence.choices).not.toBeNull();
+        expect(sequence.choices.length).toBe(2);
+        await stories.makeChoice(2);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY");
+
+        // Speek to the guardian again
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-COURTYARD");
+        await stories.makeChoice(1);
+        sequence = await stories.getCurrentSequence();
+        expect(sequence).not.toBeNull();
+        expect(sequence.id).toBe("SEQUENCE-CASTLE-SHELTER-DOOR");
+        expect(sequence.choices).not.toBeNull();
+        expect(sequence.choices.length).toBe(1);
     });
 });

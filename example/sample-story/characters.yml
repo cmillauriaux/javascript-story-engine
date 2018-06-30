@@ -2,8 +2,8 @@
 description: Describe the file here
 
 characters:
-  - id: CHARACTER-001
-    name: Character Name
+  - id: GUARDIAN-CASTEL
+    name: Guardian of the castle
     caracteristics:
       - id: CARACTERISTIC-001
         value: 10
@@ -11,8 +11,3 @@ characters:
         value: true
       - id: CARACTERISTIC-003
         value: "It's a string characteristic"
-  - id: CHARACTER-002
-    name: Character Name
-    caracteristics:
-      - id: CARACTERISTIC-001
-        value: 5

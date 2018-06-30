@@ -53,6 +53,39 @@ export namespace ConditionRules {
         return false;
     }
 
+    export function applyVariableCondition(condition: Condition, context: ContextModel): boolean {
+        if (!context.variables) {
+            return false;
+        }
+        const variable: number = context.variables.get(condition.attribute);
+
+        if (variable !== undefined && condition.exists) {
+            return true;
+        }
+
+        if (variable === undefined && condition.not) {
+            return true;
+        }
+
+        if (condition.equal && condition.value === variable) {
+            return true;
+        }
+
+        if (condition.not && condition.value !== variable) {
+            return true;
+        }
+
+        if (condition.superior && variable > condition.value) {
+            return true;
+        }
+
+        if (condition.inferior && variable < condition.value) {
+            return true;
+        }
+
+        return false;
+    }
+
     export function applyRelationCondition(condition: Condition, context: ContextModel): boolean {
         return true;
     }

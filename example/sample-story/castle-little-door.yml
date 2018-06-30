@@ -1,0 +1,14 @@
+sequences:
+  - id: SEQUENCE-CASTLE-SMALL-DOOR
+    next:
+        SEQUENCE-CASTLE-SMALL-DOOR-OPEN:
+            type: InventoryCondition
+            attribute: small-door-key
+            exists: true
+        SEQUENCE-CASTLE-SMALL-DOOR-CAT:
+            type: VariableCondition
+            attribute: meet-the-guardian
+            equal: true
+            value: true
+        SEQUENCE-CASTLE-SMALL-DOOR-NOTHING:
+            type: DefaultCondition

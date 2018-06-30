@@ -19,6 +19,7 @@ export namespace StoryEngine {
                 relations: [],
                 skills: new Map<String, number>(),
                 inventory: new Map<String, number>(),
+                variables: new Map<String, any>(), 
                 story: null,
                 sequence: null,
                 currentDialog: 0,
@@ -83,7 +84,7 @@ export namespace StoryEngine {
                 throw new Error("Invalid choice");
             }
 
-            await this.engine.applyConsequences(choice.consequences, this.context, this.persistance);
+            this.context = await this.engine.applyConsequences(choice.consequences, this.context, this.persistance);
 
             return this.engine.getValidConsequences(choice.consequences, this.context);
         }

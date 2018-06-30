@@ -8,6 +8,7 @@ export class ContextModel {
     relations: Relation[];
     skills: Map<String, number>;
     inventory: Map<String, number>;
+    variables: Map<String, any>;
     story: StoryModel;
     sequence: SequenceModel;
     currentDialog: number;

@@ -15,6 +15,8 @@ export class Engine {
                 return ConditionRules.applySkillCondition(condition, context);
             case "InventoryCondition":
                 return ConditionRules.applyInventoryCondition(condition, context);
+            case "VariableCondition":
+                return ConditionRules.applyVariableCondition(condition, context);
             case "RelationCondition":
                 return ConditionRules.applyRelationCondition(condition, context);
             default:
@@ -88,6 +90,9 @@ export class Engine {
                         break;
                     case "InventoryConsequence":
                         context = ConsequenceRules.applyInventoryConsequence(consequence, context);
+                        break;
+                    case "VariableConsequence":
+                        context = ConsequenceRules.applyVariableConsequence(consequence, context);
                         break;
                     case "RelationConsequence":
                         context = ConsequenceRules.applyRelationConsequence(consequence, context);

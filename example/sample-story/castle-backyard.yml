@@ -1,0 +1,58 @@
+sequences:
+  - id: SEQUENCE-CASTLE-COURTYARD
+    title: Entry of the Castle
+    dialogs: 
+      - text: The courtyard of the castle is completely empty.
+        foreground: foreground-002.jpg
+      - text: But now you can clearly see the light of a candle illuminating a small shelter embedded in the wall.
+        foreground: foreground-001.jpg
+    choices: 
+      - order: 1
+        title: Knock on the door of the shelter
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-SHELTER-DOOR
+      - order: 2
+        title: Go back to the main gate
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-MAIN-GATE
+  - id: SEQUENCE-CASTLE-SHELTER-DOOR
+    title: Entry of the Castle
+    dialogs: 
+      - text: An old man suddenly opens the door
+        foreground: foreground-001.jpg
+      - character: GUARDIAN-CASTEL
+        text: Hey you, what do you do here ?
+        foreground: foreground-002.jpg
+    choices: 
+      - order: 1
+        title: Nothing, sorry for the inconvenience
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-COURTYARD
+      - order: 2
+        title: Hi ! I'm here to hunt monsters
+        conditions:
+          - type: VariableCondition
+            attribute: meet-the-guardian
+            not: true
+            value: true
+        consequences:
+          - type: VariableConsequence
+            name: meet-the-guardian
+            value: true
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY
+  - id: SEQUENCE-CASTLE-SHELTER-DOOR-GO-AWAY
+    title: Entry of the Castle
+    dialogs: 
+      - character: GUARDIAN-CASTEL
+        text: Go away ! I am here for a good reason, to be alone with my cat! If you see him, tell him I'm waiting for dinner
+        foreground: foreground-002.jpg
+    choices: 
+      - order: 1
+        title: I'm leaving, sorry for the inconvenience
+        consequences:
+          - type: SequenceTransitionConsequence
+            name: SEQUENCE-CASTLE-COURTYARD

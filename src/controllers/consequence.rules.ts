@@ -36,6 +36,15 @@ export namespace ConsequenceRules {
         return context;
     }
 
+    export function applyVariableConsequence(consequence: Consequence, context: ContextModel): ContextModel {
+        if (!context.variables) {
+            context.variables = new Map<String, any>();
+        }
+        context.variables.set(consequence.name, consequence.value);
+
+        return context;
+    }
+
     export function applyRelationConsequence(consequence: Consequence, context: ContextModel): ContextModel {
         return context;
     }

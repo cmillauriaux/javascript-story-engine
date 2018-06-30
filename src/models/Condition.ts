@@ -5,5 +5,6 @@ export class Condition {
     inferior?: boolean;
     exists?: boolean;
     equal?: boolean;
+    not?: boolean;
     value?: number;
 }

@@ -1,6 +1,3 @@
----
-description: Describe the file here
-
 sequences:
   - id: SEQUENCE-CASTLE-ENTRY
     title: Entry of the Castle
@@ -40,21 +37,3 @@ sequences:
         consequences:
           - type: SequenceTransitionConsequence
             name: SEQUENCE-CASTLE-ENTRY
-  - id: SEQUENCE-CASTLE-COURTYARD
-    title: Entry of the Castle
-    dialogs: 
-      - text: The courtyard of the castle is completely empty.
-        foreground: foreground-002.jpg
-      - text: But now you can clearly see the light of a candle illuminating a small shelter embedded in the wall.
-        foreground: foreground-001.jpg
-    choices: 
-      - order: 1
-        title: Knock on the door of the shelter
-        consequences:
-          - type: SequenceTransitionConsequence
-            name: SEQUENCE-CASTLE-SHELTER-DOOR
-      - order: 2
-        title: Go back to the main gate
-        consequences:
-          - type: SequenceTransitionConsequence
-            name: SEQUENCE-CASTLE-MAIN-GATE
