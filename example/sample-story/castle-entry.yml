@@ -6,8 +6,10 @@ sequences:
         foreground: foreground-001.jpg
       - text: There is no one around, no light, no sound.
         foreground: foreground-001.jpg
+        skippedAfterFirstTime: true
       - text: The main gate of the castle faces you, waiting for you. You also see a small door in what looks like the moat remains.
         foreground: foreground-001.jpg
+        skippedAfterFirstTime: true
     choices: 
       - order: 1
         title: Go to the gate
@@ -37,3 +39,5 @@ sequences:
         consequences:
           - type: sequence
             name: CASTLE-ENTRY
+          - type: text
+            name: You walk to the entry

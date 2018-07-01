@@ -64,8 +64,6 @@ In the root directory project, you can see a `visualizer` directory. This is a s
 
 ## TODO
 
-* Return text to display in a consequence
 * Visualize relations
 * Mark dialog as "skipped after first display"
-* Display sequence title before dialog
 * Display inventory

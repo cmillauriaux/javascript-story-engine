@@ -12,4 +12,5 @@ export class ContextModel {
     story: StoryModel;
     sequence: SequenceModel;
     currentDialog: number;
+    path: Map<String, boolean>;
 }

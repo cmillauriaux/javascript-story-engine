@@ -19,10 +19,11 @@ export namespace StoryEngine {
                 relations: [],
                 skills: new Map<String, number>(),
                 inventory: new Map<String, number>(),
-                variables: new Map<String, any>(), 
+                variables: new Map<String, any>(),
                 story: null,
                 sequence: null,
                 currentDialog: 0,
+                path: new Map<String, boolean>(),
             };
         }
 
@@ -37,6 +38,10 @@ export namespace StoryEngine {
             this.context.sequence = await this.persistance.getSequence(storyId, this.context.story.entrypoint);
 
             return this.context.story;
+        }
+
+        private markSequencePassed(sequence: SequenceModel) {
+            this.context.path.set(sequence.id, true);
         }
 
         getCurrentStory(): StoryModel {
@@ -71,6 +76,16 @@ export namespace StoryEngine {
                 }
             }
 
+            // return valid dialogs only
+            clone.dialogs = [];
+            for (let dialog of sequence.dialogs) {
+                if ((dialog.showOnlyAfterFirstTime && this.context.path.get(sequence.id))
+                    || (dialog.skippedAfterFirstTime && !this.context.path.get(sequence.id))
+                    || (!dialog.showOnlyAfterFirstTime && !dialog.skippedAfterFirstTime)) {
+                    clone.dialogs.push(dialog);
+                }
+            }
+
             return clone;
         }
 
@@ -78,6 +93,8 @@ export namespace StoryEngine {
             if (!this.context.sequence) {
                 throw new Error("Aucune séquence en cours");
             }
+
+            this.markSequencePassed(this.context.sequence);
 
             const choice: Choice = this.engine.getChoice(this.context.sequence.choices, order);
             if (!this.engine.isChoiceValid(choice, this.context)) {

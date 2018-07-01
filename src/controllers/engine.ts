@@ -98,6 +98,8 @@ export class Engine {
                     case "relation":
                         context = ConsequenceRules.applyRelationConsequence(consequence, context);
                         break;
+                    case "text":
+                        break;
                     case "sequence":
                         context = await ConsequenceRules.applySequenceTransitionConsequence(consequence, context, persistance);
                         // Manage with passtrough sequences

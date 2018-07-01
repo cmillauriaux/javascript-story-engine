@@ -1,6 +1,7 @@
 import { Consequence } from "../models/Consequence";
 import { ContextModel } from "../models/Context";
 import { IPersistanceAdapter } from "./persistance-adapter";
+import { SequenceModel } from "../models/Sequence";
 
 export namespace ConsequenceRules {
 
