@@ -84,9 +84,11 @@ export namespace StoryEngine {
                 throw new Error("Invalid choice");
             }
 
+            const consequences = this.engine.getValidConsequences(choice.consequences, this.context);
+
             this.context = await this.engine.applyConsequences(choice.consequences, this.context, this.persistance);
 
-            return this.engine.getValidConsequences(choice.consequences, this.context);
+            return consequences
         }
     }
 }

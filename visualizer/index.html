@@ -2,9 +2,28 @@
 
 <head>
     <link rel="stylesheet" href="alchemy/alchemy.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
+    <div class="info">
+        <div class="center">Title</div>
+        <div>
+            <table id="main">
+                <tr>
+                    <td>ID</td>
+                    <td id="info_id"></td>
+                    <td>Title</td>
+                    <td id="title_id"></td>
+                </tr>
+            </table>
+            <p>Choices</p>
+            <table id="choices"></table>
+            <p>Next</p>
+            <table id="next"></table>
+        </div>
+    </div>
     <div class="alchemy" id="alchemy"></div>
     <script src="alchemy/scripts/vendor.js"></script>
     <script src="alchemy/alchemy.min.js"></script>
@@ -19,7 +38,92 @@
                 sequence: {
                     captionSize: 5,
                 }
-            }
+            },
+            "nodeClick": function (node) {
+                console.log(node);
+                document.getElementById("info_id").innerText = node._properties.id;
+                document.getElementById("title_id").innerText = node._properties.caption;
+
+                // Clear table
+                $("#choices tr").remove();
+                var choicesTable = document.getElementById('choices');
+
+                // Make a row for each choice
+                if (node._properties.choices) {
+                    console.log("Choices");
+                    for (var choice of node._properties.choices) {
+                        var tr = document.createElement("tr");
+
+                        // Add order
+                        var td = document.createElement("td");
+                        var order = document.createTextNode(choice.order);
+                        td.appendChild(order);
+                        tr.appendChild(td);
+
+                        // Add title
+                        td = document.createElement("td");
+                        var title = document.createTextNode(choice.title);
+                        td.appendChild(title);
+                        tr.appendChild(td);
+
+                        // Add Conditions
+                        td = document.createElement("td");
+                        if (choice.conditions) {
+                            for (var condition of choice.conditions) {
+                                var conditionTxt = condition.type + " ";
+                                if (condition.attribute) {
+                                    conditionTxt += condition.attribute + " ";
+                                }
+                                if (condition.superior) {
+                                    conditionTxt += " > ";
+                                }
+                                if (condition.inferior) {
+                                    conditionTxt += " < ";
+                                }
+                                if (condition.equal) {
+                                    conditionTxt += " = ";
+                                }
+                                if (condition.not) {
+                                    conditionTxt += " != ";
+                                }
+                                if (condition.exists) {
+                                    conditionTxt += " exists ";
+                                }
+                                if (condition.value) {
+                                    conditionTxt += condition.value;
+                                }
+                                td.appendChild(document.createTextNode(conditionTxt));
+                            }
+                        }
+                        tr.appendChild(td);
+
+                        // Add Consequences
+                        td = document.createElement("td");
+                        if (choice.consequences) {
+                            for (var consequence of choice.consequences) {
+                                var conditionTxt = consequence.type + " " + consequence.name;
+                                if (consequence.value) {
+                                    if (consequence.bonus) {
+                                        conditionTxt += " +";
+                                    } else {
+                                        conditionTxt += " -";
+                                    }
+                                    conditionTxt += consequence.value;
+                                }
+                                conditionTxt += " ";
+                                td.appendChild(document.createTextNode(conditionTxt));
+                            }
+                        }
+                        tr.appendChild(td);
+
+                        tr.appendChild(td);
+                        choicesTable.appendChild(tr);
+                    }
+                }
+            },
+            "edgeClick": function (edge) {
+                console.log(node);
+            },
         };
 
         alchemy = new Alchemy(config)

@@ -4,42 +4,195 @@
         {
             "caption": "CASTLE-COURTYARD",
             "type": "sequence",
-            "id": 0
+            "id": 0,
+            "choices": [
+                {
+                    "order": 1,
+                    "title": "Knock on the door of the shelter",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-SHELTER-DOOR"
+                        }
+                    ]
+                },
+                {
+                    "order": 2,
+                    "title": "Go back to the main gate",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-MAIN-GATE"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "caption": "CASTLE-SHELTER-DOOR",
             "type": "sequence",
-            "id": 1
+            "id": 1,
+            "choices": [
+                {
+                    "order": 1,
+                    "title": "Nothing, sorry for the inconvenience",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-COURTYARD"
+                        }
+                    ]
+                },
+                {
+                    "order": 2,
+                    "title": "Hi ! I'm here to hunt monsters",
+                    "conditions": [
+                        {
+                            "type": "variable",
+                            "attribute": "meet-the-guardian",
+                            "not": true,
+                            "value": true
+                        }
+                    ],
+                    "consequences": [
+                        {
+                            "type": "variable",
+                            "name": "meet-the-guardian",
+                            "value": true
+                        },
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-SHELTER-DOOR-GO-AWAY"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "caption": "CASTLE-SHELTER-DOOR-GO-AWAY",
             "type": "sequence",
-            "id": 2
+            "id": 2,
+            "choices": [
+                {
+                    "order": 1,
+                    "title": "I'm leaving, sorry for the inconvenience",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-COURTYARD"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "caption": "CASTLE-ENTRY",
             "type": "sequence",
-            "id": 3
+            "id": 3,
+            "choices": [
+                {
+                    "order": 1,
+                    "title": "Go to the gate",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-MAIN-GATE"
+                        }
+                    ]
+                },
+                {
+                    "order": 2,
+                    "title": "Go to the small door",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-SMALL-DOOR"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "caption": "CASTLE-MAIN-GATE",
             "type": "sequence",
-            "id": 4
+            "id": 4,
+            "choices": [
+                {
+                    "order": 1,
+                    "title": "Enter in the castle",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-COURTYARD"
+                        }
+                    ]
+                },
+                {
+                    "order": 2,
+                    "title": "Go back to the entry",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-ENTRY"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "caption": "CASTLE-SMALL-DOOR",
             "type": "sequence",
-            "id": 5
+            "id": 5,
+            "next": {
+                "CASTLE-SMALL-DOOR-OPEN": {
+                    "type": "inventory",
+                    "attribute": "small-door-key",
+                    "exists": true
+                },
+                "CASTLE-SMALL-DOOR-CAT": {
+                    "type": "variable",
+                    "attribute": "meet-the-guardian",
+                    "equal": true,
+                    "value": true
+                },
+                "CASTLE-SMALL-DOOR-NOTHING": {
+                    "type": "DefaultCondition"
+                }
+            }
         },
         {
             "caption": "CASTLE-SMALL-DOOR-NOTHING",
             "type": "sequence",
-            "id": 6
+            "id": 6,
+            "choices": [
+                {
+                    "order": 1,
+                    "title": "Go back to the entry",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-ENTRY"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "caption": "CASTLE-SMALL-DOOR-CAT",
             "type": "sequence",
-            "id": 7
+            "id": 7,
+            "choices": [
+                {
+                    "order": 1,
+                    "title": "Go back to the entry",
+                    "consequences": [
+                        {
+                            "type": "sequence",
+                            "name": "CASTLE-ENTRY"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "edges": [

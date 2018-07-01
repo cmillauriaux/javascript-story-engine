@@ -21,7 +21,9 @@ export class ExportAlchemy implements IExportAdapter {
             result.nodes.push({
                 "caption": sequence.id,
                 "type": "sequence",
-                "id": ids.get(sequence.id)
+                "id": ids.get(sequence.id),
+                "choices": sequence.choices,
+                "next": sequence.next
             });
 
             if (sequence.next) {
